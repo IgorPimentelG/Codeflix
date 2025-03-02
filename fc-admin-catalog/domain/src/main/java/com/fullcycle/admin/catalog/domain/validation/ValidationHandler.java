@@ -12,6 +12,13 @@ public interface ValidationHandler {
         return getErrors() != null && !getErrors().isEmpty();
     }
 
+    default Error firstError() {
+        if (getErrors() != null && !getErrors().isEmpty()) {
+            return getErrors().get(0);
+        }
+        return null;
+    }
+
    interface Validation {
         void validate();
     }
