@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  mysql:
+    container_name: adm_videos_mysql
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: adm_videos
+      MYSQL_ROOT_PASSWORD: admin
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - '3306:3306'
+    networks:
+      - local
+
+networks:
+  local:
