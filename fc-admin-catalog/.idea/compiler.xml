@@ -8,8 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="application" />
-        <module name="infrastructure" />
         <module name="domain" />
+      </profile>
+      <profile name="Annotation profile for fc-admin-catalog" enabled="true">
+        <sourceOutputDir name="build/libs/generated-sources/annotations" />
+        <sourceTestOutputDir name="build/libs/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="infrastructure" />
       </profile>
     </annotationProcessing>
   </component>

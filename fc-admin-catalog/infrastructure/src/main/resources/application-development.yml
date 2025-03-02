@@ -1,0 +1,10 @@
+server:
+  port: 1000
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/json
+    min-response-type: 1025
+  undertow:
+    threads:
+      worker: 64
+      io: 4
