@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DefaultListCategoriesUseCase extends ListCategoriesUseCase {
 
-    private CategoryGateway categoryGateway;
+    private final CategoryGateway categoryGateway;
 
     @Override
     public Pagination<CategoryListOutput> execute(CategorySearchQuery query) {
