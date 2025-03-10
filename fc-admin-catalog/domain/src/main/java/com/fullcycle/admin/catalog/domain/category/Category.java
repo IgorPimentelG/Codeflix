@@ -6,6 +6,8 @@ import com.fullcycle.admin.catalog.domain.validation.ValidationHandler;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.Instant;
+import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -31,7 +33,7 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
         this.name = name;
         this.description = description;
         this.active = active;
-        this.createdAt = createdAt;
+        this.createdAt = Objects.requireNonNull(createdAt, "CreatedAt cannot be null");
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
     }
@@ -41,6 +43,18 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
         final var now = Instant.now();
         final var deletedAt = active ? null : Instant.now();
         return new Category(id, name, description, active, now, null, deletedAt);
+    }
+
+    public static Category with(
+      final UUID id,
+      final String name,
+      final String description,
+      final boolean active,
+      final Instant createdAt,
+      final Instant updatedAt,
+      final Instant deletedAt
+    ) {
+        return new Category(CategoryID.from(id), name, description, active, createdAt, updatedAt, deletedAt);
     }
 
     @Override
