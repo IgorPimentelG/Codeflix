@@ -1,3 +1,7 @@
 package com.fullcycle.admin.catalog.domain;
 
-public abstract class Identifier {}
+import java.util.UUID;
+
+public abstract class Identifier {
+    public abstract UUID getValue();
+}

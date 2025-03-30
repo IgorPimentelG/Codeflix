@@ -10,6 +10,8 @@ server:
       io: 4
 
 spring:
+  profiles:
+    active: development
   datasource:
     url: jdbc:mysql://${mysql.url}/${mysql.schema}?useSSL=true&serverTimezone=UTC
     username: ${mysql.username}

@@ -7,8 +7,6 @@ import io.vavr.API;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Objects;
-
 @RequiredArgsConstructor
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
