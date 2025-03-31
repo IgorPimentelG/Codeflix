@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Inherited
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@ActiveProfiles("test")
+@ActiveProfiles("test-integration")
 @DataJpaTest
 @ExtendWith(CleanUpExtension.class)
 @ComponentScan(includeFilters = {

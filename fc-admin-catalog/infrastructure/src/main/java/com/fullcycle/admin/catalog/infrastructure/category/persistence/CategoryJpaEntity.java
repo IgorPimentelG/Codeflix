@@ -8,6 +8,10 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
+import org.hibernate.usertype.UserType;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -20,6 +24,7 @@ import java.util.UUID;
 public class CategoryJpaEntity {
 
     @Id
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
     @Column(nullable = false)
