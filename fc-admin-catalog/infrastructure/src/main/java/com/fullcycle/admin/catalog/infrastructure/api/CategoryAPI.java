@@ -50,7 +50,6 @@ public interface CategoryAPI {
 
     @GetMapping(
       value = "/{id}",
-      consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE
     )
     @Operation(summary = "Get a category by it's identifier")
@@ -74,11 +73,7 @@ public interface CategoryAPI {
     })
     ResponseEntity<?> update(@PathVariable("id") UUID id, @RequestBody @Valid UpdateCategoryRequest input);
 
-    @DeleteMapping(
-      value = "/{id}",
-      consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a category by it's identifier")
     @ApiResponses(value = {
