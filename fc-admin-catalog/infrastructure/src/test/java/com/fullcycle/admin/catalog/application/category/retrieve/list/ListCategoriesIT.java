@@ -3,7 +3,7 @@ package com.fullcycle.admin.catalog.application.category.retrieve.list;
 import com.fullcycle.admin.catalog.IntegrationTest;
 import com.fullcycle.admin.catalog.domain.category.Category;
 import com.fullcycle.admin.catalog.domain.category.CategoryGateway;
-import com.fullcycle.admin.catalog.domain.category.CategorySearchQuery;
+import com.fullcycle.admin.catalog.domain.pagination.SearchQuery;
 import com.fullcycle.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity;
 import com.fullcycle.admin.catalog.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +54,7 @@ public class ListCategoriesIT {
             final var expectedItemsCount = 0;
             final var expectedTotal = 0;
 
-            final var query = new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+            final var query = new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
             final var output = useCase.execute(query);
 
@@ -84,7 +84,7 @@ public class ListCategoriesIT {
         final var expectedSort = "name";
         final var expectedDirection = "asc";
 
-        final var query = new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+        final var query = new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
         final var output = useCase.execute(query);
 
@@ -112,7 +112,7 @@ public class ListCategoriesIT {
     ) {
         final var expectedTerms = "";
 
-        final var query = new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+        final var query = new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
         final var output = useCase.execute(query);
 
@@ -140,7 +140,7 @@ public class ListCategoriesIT {
         final var expectedDirection = "asc";
         final var expectedTerms = "";
 
-        final var query = new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+        final var query = new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
         final var output = useCase.execute(query);
 
