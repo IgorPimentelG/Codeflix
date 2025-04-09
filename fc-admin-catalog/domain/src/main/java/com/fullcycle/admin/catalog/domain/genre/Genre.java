@@ -134,6 +134,13 @@ public class Genre extends AggregateRoot<GenreID> {
         }
     }
 
+    public void addCategories(final List<CategoryID> categoriesIds) {
+        if (categoriesIds != null && !categoriesIds.isEmpty()) {
+            categories.addAll(categoriesIds);
+            updatedAt = InstantUtils.now();
+        }
+    }
+
     public void removeCategory(final CategoryID categoryID) {
         if (categoryID != null) {
             categories.remove(categoryID);

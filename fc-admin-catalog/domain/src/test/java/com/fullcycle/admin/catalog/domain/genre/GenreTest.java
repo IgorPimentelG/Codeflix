@@ -343,4 +343,66 @@ public class GenreTest {
         assertEquals(2, genre.getCategories().size());
         assertEquals(genre.getCategories(), expectedCategories);
     }
+
+    @Test
+    public void givenEmptyCategoriesGenre_whenCallAddCategories_shouldReceiveOk() {
+        final var seriesID = CategoryID.from(UUID.randomUUID());
+        final var moviesID = CategoryID.from(UUID.randomUUID());
+        final var expectedName = "Any name";
+        final var expectedIsActive = true;
+        final var expectedCategories = List.of(seriesID, moviesID);
+
+        final var genre = Genre.newGenre(expectedName, expectedIsActive);
+        genre.addCategories(expectedCategories);
+
+        assertNotNull(genre);
+        assertNotNull(genre.getId());
+        assertEquals(expectedName, genre.getName());
+        assertEquals(expectedIsActive, genre.isActive());
+        assertNotNull(genre.getCreatedAt());
+        assertNotNull(genre.getUpdatedAt());
+        assertNull(genre.getDeletedAt());
+        assertEquals(2, genre.getCategories().size());
+        assertEquals(genre.getCategories(), expectedCategories);
+    }
+
+    @Test
+    public void givenEmptyCategoriesGenre_whenCallAddCategoriesWithEmptyList_shouldReceiveOk() {
+        final var expectedName = "Any name";
+        final var expectedIsActive = true;
+        final var expectedCategories = List.<CategoryID>of();
+
+        final var genre = Genre.newGenre(expectedName, expectedIsActive);
+        genre.addCategories(expectedCategories);
+
+        assertNotNull(genre);
+        assertNotNull(genre.getId());
+        assertEquals(expectedName, genre.getName());
+        assertEquals(expectedIsActive, genre.isActive());
+        assertNotNull(genre.getCreatedAt());
+        assertNull(genre.getUpdatedAt());
+        assertNull(genre.getDeletedAt());
+        assertEquals(0, genre.getCategories().size());
+        assertEquals(genre.getCategories(), expectedCategories);
+    }
+
+    @Test
+    public void givenEmptyCategoriesGenre_whenCallAddCategoriesWithNullList_shouldReceiveOk() {
+        final var expectedName = "Any name";
+        final var expectedIsActive = true;
+        final var expectedCategories = List.<CategoryID>of();
+
+        final var genre = Genre.newGenre(expectedName, expectedIsActive);
+        genre.addCategories(null);
+
+        assertNotNull(genre);
+        assertNotNull(genre.getId());
+        assertEquals(expectedName, genre.getName());
+        assertEquals(expectedIsActive, genre.isActive());
+        assertNotNull(genre.getCreatedAt());
+        assertNull(genre.getUpdatedAt());
+        assertNull(genre.getDeletedAt());
+        assertEquals(0, genre.getCategories().size());
+        assertEquals(genre.getCategories(), expectedCategories);
+    }
 }
