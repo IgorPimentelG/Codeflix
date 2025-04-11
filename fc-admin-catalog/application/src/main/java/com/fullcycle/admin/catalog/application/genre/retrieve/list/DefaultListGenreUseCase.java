@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DefaultListGenreUseCase extends ListGenreUseCase {
 
-    private GenreGateway genreGateway;
+    private final GenreGateway genreGateway;
 
     @Override
     public Pagination<GenreListOutput> execute(final SearchQuery query) {
