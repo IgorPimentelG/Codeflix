@@ -19,7 +19,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "Category")
 @Table(name = "categories")
 public class CategoryJpaEntity {
 

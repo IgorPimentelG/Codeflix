@@ -21,10 +21,6 @@ public class CleanUpExtension implements BeforeEachCallback {
           ctx.getBean(GenreRepository.class),
           ctx.getBean(CategoryRepository.class)
         ));
-
-        final var em = ctx.getBean(TestEntityManager.class);
-          em.flush();
-          em.clear();
     }
 
     private void cleanUp(final Collection<CrudRepository> repositories) {

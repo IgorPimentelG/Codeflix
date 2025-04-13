@@ -100,6 +100,5 @@ public class ListGenreUseCaseTest extends UseCaseTest {
         final var output = assertThrows(IllegalStateException.class, () -> useCase.execute(query));
 
         assertEquals(expectedErrorMessage, output.getMessage());
-
     }
 }

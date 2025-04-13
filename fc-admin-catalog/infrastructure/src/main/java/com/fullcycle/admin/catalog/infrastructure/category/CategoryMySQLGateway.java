@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import static com.fullcycle.admin.catalog.infrastructure.utils.SpecificationUtils.like;
 
@@ -43,8 +44,13 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public List<CategoryID> existsByIds(final Iterable<CategoryID> id) {
-        return Collections.emptyList();
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> categoryIds) {
+        final var ids = StreamSupport.stream(categoryIds.spliterator(), false)
+          .map(CategoryID::getValue)
+          .toList();
+        return repository.existsByIds(ids).stream()
+          .map(CategoryID::from)
+          .toList();
     }
 
     @Override
