@@ -53,7 +53,8 @@ public class GenreController implements GenreAPI {
 
     @Override
     public GenreResponse getById(final UUID id) {
-        return GenreApiPresenter.present(getGenreByIdUseCase.execute(id));
+        final var genre = getGenreByIdUseCase.execute(id);
+        return GenreApiPresenter.present(genre);
     }
 
     @Override

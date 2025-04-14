@@ -54,7 +54,7 @@ public interface CategoryAPI {
     )
     @Operation(summary = "Get a category by it's identifier")
     @ApiResponses(value = {
-      @ApiResponse(responseCode = "201", description = "Category retrieved successfully"),
+      @ApiResponse(responseCode = "200", description = "Category retrieved successfully"),
       @ApiResponse(responseCode = "404", description = "Category was not found"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
     })

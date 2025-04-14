@@ -52,7 +52,7 @@ public interface GenreAPI {
       @ApiResponse(responseCode = "404", description = "Genre was not found"),
       @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
     })
-    GenreResponse getById(@PathVariable("id")UUID id);
+    GenreResponse getById(@PathVariable("id") UUID id);
 
     @PutMapping(
       value = "/{id}",

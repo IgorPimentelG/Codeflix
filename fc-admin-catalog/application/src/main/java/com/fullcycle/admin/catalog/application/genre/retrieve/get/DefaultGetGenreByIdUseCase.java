@@ -7,6 +7,7 @@ import com.fullcycle.admin.catalog.domain.genre.GenreID;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
+import java.util.function.Supplier;
 
 @RequiredArgsConstructor
 public class DefaultGetGenreByIdUseCase extends GetGenreByIdUseCase {
@@ -16,8 +17,12 @@ public class DefaultGetGenreByIdUseCase extends GetGenreByIdUseCase {
     @Override
     public GenreOutput execute(final UUID id) {
         final var genreID = GenreID.from(id);
-        final var genre = genreGateway.findById(genreID)
-          .orElseThrow(() -> NotFoundException.with(Genre.class, genreID));
-        return GenreOutput.from(genre);
+        return genreGateway.findById(genreID)
+          .map(GenreOutput::from)
+          .orElseThrow(notFound(genreID));
+    }
+
+    private Supplier<NotFoundException> notFound(GenreID genreID) {
+        return () -> NotFoundException.with(Genre.class, genreID);
     }
 }
