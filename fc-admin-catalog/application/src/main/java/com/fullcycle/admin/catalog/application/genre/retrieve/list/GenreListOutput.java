@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public record GenreListOutput(
+  String id,
   String name,
   boolean isActive,
   List<String> categories,
@@ -16,6 +17,7 @@ public record GenreListOutput(
 ) {
     public static GenreListOutput from(final Genre genre) {
         return new GenreListOutput(
+          genre.getId().getValue().toString(),
           genre.getName(),
           genre.isActive(),
           genre.getCategories()
