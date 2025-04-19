@@ -61,7 +61,7 @@ public class GenreController implements GenreAPI {
     public ResponseEntity<?> update(final UUID id, final UpdateGenreRequest input) {
         final var command = UpdateGenreCommand.with(id, input.name(), input.active(), input.categories());
         final var output = updateGenreUseCase.execute(command);
-        return ResponseEntity.created(URI.create("/genres/" + output.id().toString())).body(output);
+        return ResponseEntity.ok(output);
     }
 
     @Override

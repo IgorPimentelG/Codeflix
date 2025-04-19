@@ -6,6 +6,8 @@ import com.fullcycle.admin.catalog.domain.genre.GenreID;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -22,6 +24,7 @@ import static jakarta.persistence.FetchType.EAGER;
 public class GenreJpaEntity {
 
     @Id
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     @Column(nullable = false)
     private UUID id;
 
