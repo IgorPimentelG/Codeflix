@@ -9,7 +9,7 @@ public interface CastMemberGateway {
 
     CastMember create(CastMember castMember);
     CastMember update(CastMember castMember);
-    void deleteByID(CastMemberID id);
-    Optional<CastMember> findByID(CastMemberID id);
+    void deleteById(CastMemberID id);
+    Optional<CastMember> findById(CastMemberID id);
     Pagination<CastMember> findAll(SearchQuery query);
 }
