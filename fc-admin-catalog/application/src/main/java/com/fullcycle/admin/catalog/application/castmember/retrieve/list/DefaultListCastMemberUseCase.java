@@ -6,7 +6,7 @@ import com.fullcycle.admin.catalog.domain.pagination.SearchQuery;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public final class DefaultListCastMemberUseCase extends ListCastMemberUseCase{
+public non-sealed class DefaultListCastMemberUseCase extends ListCastMemberUseCase{
 
     private final CastMemberGateway castMemberGateway;
 

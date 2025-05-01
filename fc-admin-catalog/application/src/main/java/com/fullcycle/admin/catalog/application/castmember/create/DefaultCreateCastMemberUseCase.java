@@ -7,7 +7,7 @@ import com.fullcycle.admin.catalog.domain.validation.handler.Notification;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public final class DefaultCreateCastMemberUseCase extends CreateCastMemberUseCase {
+public non-sealed class DefaultCreateCastMemberUseCase extends CreateCastMemberUseCase {
 
     private final CastMemberGateway castMemberGateway;
 

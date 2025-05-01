@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public final class DefaultDeleteCastMemberUseCase extends DeleteCastMemberUseCase {
+public non-sealed class DefaultDeleteCastMemberUseCase extends DeleteCastMemberUseCase {
 
     private final CastMemberGateway castMemberGateway;
 

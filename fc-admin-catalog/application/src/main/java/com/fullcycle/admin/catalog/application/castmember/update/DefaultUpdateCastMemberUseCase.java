@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.function.Supplier;
 
 @RequiredArgsConstructor
-public final class DefaultUpdateCastMemberUseCase extends UpdateCastMemberUseCase {
+public non-sealed class DefaultUpdateCastMemberUseCase extends UpdateCastMemberUseCase {
 
     private final CastMemberGateway castMemberGateway;
 

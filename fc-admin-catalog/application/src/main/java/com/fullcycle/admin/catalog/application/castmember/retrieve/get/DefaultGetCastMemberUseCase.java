@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public final class DefaultGetCastMemberUseCase extends GetCastMemberUseCase {
+public non-sealed class DefaultGetCastMemberUseCase extends GetCastMemberUseCase {
 
     private final CastMemberGateway castMemberGateway;
 
