@@ -1,8 +1,12 @@
 package com.fullcycle.admin.catalog.e2e;
 
 import com.fullcycle.admin.catalog.domain.Identifier;
+import com.fullcycle.admin.catalog.domain.castmember.CastMemberID;
+import com.fullcycle.admin.catalog.domain.castmember.CastMemberType;
 import com.fullcycle.admin.catalog.domain.category.CategoryID;
 import com.fullcycle.admin.catalog.domain.genre.GenreID;
+import com.fullcycle.admin.catalog.infrastructure.castmember.models.CastMemberResponse;
+import com.fullcycle.admin.catalog.infrastructure.castmember.models.CreateCastMemberRequest;
 import com.fullcycle.admin.catalog.infrastructure.category.models.CategoryResponse;
 import com.fullcycle.admin.catalog.infrastructure.category.models.CreateCategoryRequest;
 import com.fullcycle.admin.catalog.infrastructure.configuration.json.Json;
@@ -14,7 +18,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Function;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,6 +40,13 @@ public interface MockDsl {
         return id;
     }
 
+    private ResultActions givenResult(final String url, final Object body) throws Exception {
+        final var request = MockMvcRequestBuilders.post(url)
+          .contentType(MediaType.APPLICATION_JSON_VALUE)
+          .content(Json.writeValueAsString(body));
+        return mvc().perform(request);
+    }
+
     default CategoryID givenCategory(final String name, final String description, final boolean isActive) throws Exception {
         final var input = new CreateCategoryRequest(name, description, isActive);
         final var id = this.given("/categories", input);
@@ -50,12 +60,27 @@ public interface MockDsl {
         return GenreID.from(id);
     }
 
+    default CastMemberID givenCastMember(final String name, CastMemberType type) throws Exception {
+        final var input = new CreateCastMemberRequest(name, type);
+        final var id = this.given("/cast-members", input);
+        return CastMemberID.from(id);
+    }
+
+    default ResultActions givenCastMemberResult(final String name, CastMemberType type) throws Exception {
+        final var input = new CreateCastMemberRequest(name, type);
+        return this.givenResult("/cast-members", input);
+    }
+
     default ResultActions deleteCategory(final Identifier id) throws Exception {
         return this.delete("/categories", id);
     }
 
     default ResultActions deleteGenre(final Identifier id) throws Exception {
         return this.delete("/genres", id);
+    }
+
+    default ResultActions deleteCastMember(final Identifier id) throws Exception {
+        return this.delete("/cast-members", id);
     }
 
     default ResultActions listCategories(final int page, final int perPage) throws Exception {
@@ -94,6 +119,24 @@ public interface MockDsl {
         return this.list("/genres", page, perPage, dir, sort, search);
     }
 
+    default ResultActions listCastMembers(final int page, final int perPage) throws Exception {
+        return listCastMembers(page, perPage, "", "", "");
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage, String search) throws Exception {
+        return listCastMembers(page, perPage, "", "", search);
+    }
+
+    default ResultActions listCastMembers(
+      final int page,
+      final int perPage,
+      final String dir,
+      final String sort,
+      final String search
+    ) throws Exception {
+        return this.list("/cast-members", page, perPage, dir, sort, search);
+    }
+
     default CategoryResponse retrieveCategory(final Identifier id) throws Exception {
         return this.retrieve("/categories", id, CategoryResponse.class);
     }
@@ -102,12 +145,20 @@ public interface MockDsl {
         return this.retrieve("/genres", id, GenreResponse.class);
     }
 
+    default CastMemberResponse retrieveCastMember(final Identifier id) throws Exception {
+        return this.retrieve("/cast-members", id, CastMemberResponse.class);
+    }
+
     default ResultActions updateCategory(final Identifier id, final Object body) throws Exception {
         return this.update("/categories", id, body);
     }
 
     default ResultActions updateGenre(final Identifier id, final Object body) throws Exception {
         return this.update("/genres", id, body);
+    }
+
+    default ResultActions updateCastMember(final Identifier id, final Object body) throws Exception {
+        return this.update("/cast-members", id, body);
     }
 
     private <T> T retrieve(final String url, final Identifier id, final Class<T> clazz) throws Exception {
