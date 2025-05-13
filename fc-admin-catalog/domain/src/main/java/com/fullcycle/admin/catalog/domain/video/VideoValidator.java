@@ -29,18 +29,18 @@ public class VideoValidator extends Validator {
         final var title = video.getTitle();
 
         if (title == null) {
-            validationHandler().append(new Error("Name cannot be null"));
+            validationHandler().append(new Error("Title cannot be null"));
             return;
         }
 
         if (title.isBlank()) {
-            validationHandler().append(new Error("Name cannot be empty"));
+            validationHandler().append(new Error("Title cannot be empty"));
             return;
         }
 
         final int length = title.trim().length();
         if (length > TITLE_MAX_LENGTH || length < MIN_LENGTH) {
-            validationHandler().append(new Error("Name must be between 1 and 255 characters"));
+            validationHandler().append(new Error("Title must be between 1 and 255 characters"));
         }
     }
 

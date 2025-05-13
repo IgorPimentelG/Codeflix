@@ -227,7 +227,6 @@ public class VideoValidatorTest {
         );
 
         final var validator = new VideoValidator(video, new ThrowsValidationHandler());
-
         final var error = assertThrows(DomainException.class, validator::validate);
 
         assertEquals(expectedErrorCount, error.getErrors().size());
@@ -264,7 +263,6 @@ public class VideoValidatorTest {
         );
 
         final var validator = new VideoValidator(video, new ThrowsValidationHandler());
-
         final var error = assertThrows(DomainException.class, validator::validate);
 
         assertEquals(expectedErrorCount, error.getErrors().size());
@@ -301,7 +299,6 @@ public class VideoValidatorTest {
         );
 
         final var validator = new VideoValidator(video, new ThrowsValidationHandler());
-
         final var error = assertThrows(DomainException.class, validator::validate);
 
         assertEquals(expectedErrorCount, error.getErrors().size());

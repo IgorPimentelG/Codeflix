@@ -31,7 +31,7 @@ public class DeleteCastMemberUseCaseTest extends UseCaseTest {
 
     @Test
     public void givenValidId_whenCallsDeleteCastMember_shouldDeleteIt() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
         final var expectedId = castMember.getId();
 
         doNothing().when(castMemberGateway).deleteById(any());
@@ -50,7 +50,7 @@ public class DeleteCastMemberUseCaseTest extends UseCaseTest {
 
     @Test
     public void givenValidId_whenCallsDeleteCastMemberAndGatewayThrowsException_shouldReceiveException() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
         final var expectedId = castMember.getId();
 
         doThrow(new IllegalStateException("Gateway error")).when(castMemberGateway).deleteById(any());
