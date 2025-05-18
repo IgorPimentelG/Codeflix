@@ -6,10 +6,13 @@ import com.fullcycle.admin.catalog.domain.category.Category;
 import com.fullcycle.admin.catalog.domain.genre.Genre;
 import com.fullcycle.admin.catalog.domain.video.Rating;
 import com.fullcycle.admin.catalog.domain.video.Resource;
+import com.fullcycle.admin.catalog.domain.video.Video;
 import com.github.javafaker.Faker;
 import io.vavr.API;
 
+import java.time.Year;
 import java.util.Arrays;
+import java.util.Set;
 
 import static io.vavr.API.*;
 
@@ -56,6 +59,21 @@ public final class Fixture {
     }
 
     public static final class Videos {
+
+        public static Video video() {
+            return Video.newVideo(
+              Fixture.title(),
+              Fixture.description(),
+              Year.of(Fixture.year()),
+              Fixture.duration(),
+              Fixture.Videos.rating(),
+              Fixture.bool(),
+              Fixture.bool(),
+              Set.of(Categories.category().getId()),
+              Set.of(Genres.genre().getId()),
+              Set.of(CastMembers.castMember().getId())
+            );
+        }
 
         public static Resource resource(final Resource.Type type) {
             final String contentType = API.Match(type).of(
