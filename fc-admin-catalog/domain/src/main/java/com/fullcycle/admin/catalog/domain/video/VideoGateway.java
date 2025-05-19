@@ -2,6 +2,7 @@ package com.fullcycle.admin.catalog.domain.video;
 
 import com.fullcycle.admin.catalog.domain.pagination.Pagination;
 import com.fullcycle.admin.catalog.domain.pagination.VideoSearchQuery;
+import com.fullcycle.admin.catalog.infrastructure.video.persistence.VideoPreview;
 
 import java.util.Optional;
 
@@ -10,5 +11,5 @@ public interface VideoGateway {
     Video update(Video video);
     void deleteById(VideoID id);
     Optional<Video> findById(VideoID id);
-    Pagination<Video> findAll(VideoSearchQuery query);
+    Pagination<VideoPreview> findAll(VideoSearchQuery query);
 }
