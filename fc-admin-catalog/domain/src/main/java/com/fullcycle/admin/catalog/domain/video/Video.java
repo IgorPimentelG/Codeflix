@@ -142,6 +142,48 @@ public class Video extends AggregateRoot<VideoID> {
         );
     }
 
+    public static Video with(
+      final VideoID id,
+      final String title,
+      final String description,
+      final Year launchedAt,
+      final double duration,
+      final Rating rating,
+      final boolean opened,
+      final boolean published,
+      final ImageMedia banner,
+      final ImageMedia thumbnail,
+      final ImageMedia thumbnailHalf,
+      final AudioVideoMedia trailer,
+      final AudioVideoMedia video,
+      final Set<CategoryID> categories,
+      final Set<GenreID> genres,
+      final Set<CastMemberID> castMembers,
+      final Instant createdAt,
+      final Instant updatedAt
+    ) {
+        return new Video(
+          id,
+          title,
+          description,
+          launchedAt,
+          duration,
+          rating,
+          opened,
+          published,
+          banner,
+          thumbnail,
+          thumbnailHalf,
+          trailer,
+          video,
+          categories,
+          genres,
+          castMembers,
+          createdAt,
+          updatedAt
+        );
+    }
+
     public Video update(
       final String title,
       final String description,
