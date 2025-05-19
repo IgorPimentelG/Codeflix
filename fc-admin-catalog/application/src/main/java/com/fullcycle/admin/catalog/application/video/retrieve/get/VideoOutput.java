@@ -1,5 +1,6 @@
 package com.fullcycle.admin.catalog.application.video.retrieve.get;
 
+import com.fullcycle.admin.catalog.domain.Identifier;
 import com.fullcycle.admin.catalog.domain.utils.CollectionUtils;
 import com.fullcycle.admin.catalog.domain.video.AudioVideoMedia;
 import com.fullcycle.admin.catalog.domain.video.ImageMedia;
@@ -39,9 +40,9 @@ public record VideoOutput(
 		  video.isOpened(),
 		  video.isPublished(),
 		  video.getRating().name(),
-		  CollectionUtils.mapTo(video.getCategories(), (identifier) -> identifier.getValue().toString()),
-		  CollectionUtils.mapTo(video.getGenres(), (identifier) -> identifier.getValue().toString()),
-		  CollectionUtils.mapTo(video.getCastMembers(), (identifier) -> identifier.getValue().toString()),
+		  CollectionUtils.mapTo(video.getCategories(), Identifier::toString),
+		  CollectionUtils.mapTo(video.getGenres(), Identifier::toString),
+		  CollectionUtils.mapTo(video.getCastMembers(), Identifier::toString),
 		  video.getVideo().orElse(null),
 		  video.getTrailer().orElse(null),
 		  video.getBanner().orElse(null),

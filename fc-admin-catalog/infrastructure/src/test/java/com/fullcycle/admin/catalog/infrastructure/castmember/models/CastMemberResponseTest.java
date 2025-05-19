@@ -25,12 +25,12 @@ public class CastMemberResponseTest {
         final var expectedCreatedAt = Instant.now();
         final var expectedUpdatedAt = Instant.now();
 
-        final var response = new CastMemberResponse(expectedId.getValue().toString(), expectedName, expectedType, expectedCreatedAt, expectedUpdatedAt);
+        final var response = new CastMemberResponse(expectedId.toString(), expectedName, expectedType, expectedCreatedAt, expectedUpdatedAt);
 
         final var result = json.write(response);
 
         Assertions.assertThat(result)
-          .hasJsonPathValue("$.id", expectedId.getValue().toString())
+          .hasJsonPathValue("$.id", expectedId.toString())
           .hasJsonPathValue("$.name", expectedName)
           .hasJsonPathValue("$.type", expectedType.name())
           .hasJsonPathValue("$.created_at", expectedCreatedAt.toString())
@@ -54,7 +54,7 @@ public class CastMemberResponseTest {
             "updated_at": "%s"
           }
           """.formatted(
-          expectedId.getValue().toString(),
+          expectedId.toString(),
           expectedName,
           expectedType.name(),
           expectedCreatedAt.toString(),
@@ -64,7 +64,7 @@ public class CastMemberResponseTest {
         final var result = json.parse(content);
 
         Assertions.assertThat(result)
-          .hasFieldOrPropertyWithValue("id", expectedId.getValue().toString())
+          .hasFieldOrPropertyWithValue("id", expectedId.toString())
           .hasFieldOrPropertyWithValue("name", expectedName)
           .hasFieldOrPropertyWithValue("type", expectedType)
           .hasFieldOrPropertyWithValue("createdAt", expectedCreatedAt)

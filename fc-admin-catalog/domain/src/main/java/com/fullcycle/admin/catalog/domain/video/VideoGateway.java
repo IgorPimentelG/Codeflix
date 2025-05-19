@@ -2,7 +2,6 @@ package com.fullcycle.admin.catalog.domain.video;
 
 import com.fullcycle.admin.catalog.domain.pagination.Pagination;
 import com.fullcycle.admin.catalog.domain.pagination.VideoSearchQuery;
-import com.fullcycle.admin.catalog.infrastructure.video.persistence.VideoPreview;
 
 import java.util.Optional;
 

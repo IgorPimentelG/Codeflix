@@ -199,7 +199,7 @@ public class CastMemberE2ETest implements MockDsl {
 
         final var castMember = castMemberRepository.findById(castMemberId.getValue()).get();
 
-        assertEquals(castMemberId.getValue().toString(), castMember.getId().toString());
+        assertEquals(castMemberId.toString(), castMember.getId().toString());
         assertEquals(expectedName, castMember.getName());
         assertEquals(expectedType, castMember.getType());
         assertNotNull(castMember.getCreatedAt());

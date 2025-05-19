@@ -181,11 +181,11 @@ public class CategoryAPITest {
     @Test
     public void givenInvValidId_whenCallsGetCategory_shouldReturnNotFoundException() throws Exception {
         final var expectedId = CategoryID.from(UUID.randomUUID());
-        final var expectedErrorMessage = "Category with ID %s was not found".formatted(expectedId.getValue().toString());
+        final var expectedErrorMessage = "Category with ID %s was not found".formatted(expectedId.toString());
 
         when(getCategoryByIdUseCase.execute(any())).thenThrow(NotFoundException.with(Category.class, expectedId));
 
-        final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.getValue().toString()).contentType(MediaType.APPLICATION_JSON_VALUE);
+        final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.toString()).contentType(MediaType.APPLICATION_JSON_VALUE);
 
         mvc.perform(request)
           .andDo(print())

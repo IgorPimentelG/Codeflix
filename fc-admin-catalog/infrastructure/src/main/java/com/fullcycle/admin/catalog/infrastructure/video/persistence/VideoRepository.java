@@ -1,5 +1,6 @@
 package com.fullcycle.admin.catalog.infrastructure.video.persistence;
 
+import com.fullcycle.admin.catalog.domain.video.VideoPreview;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -31,13 +31,11 @@ public interface MockDsl {
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(Json.writeValueAsString(body));
 
-        final var id = this.mvc().perform(request)
-          .andExpect(status().isCreated())
-          .andReturn()
-          .getResponse().getHeader("Location")
-          .replace(url + "/", "");
-
-        return id;
+	    return this.mvc().perform(request)
+	      .andExpect(status().isCreated())
+	      .andReturn()
+	      .getResponse().getHeader("Location")
+	      .replace(url + "/", "");
     }
 
     private ResultActions givenResult(final String url, final Object body) throws Exception {
@@ -54,7 +52,7 @@ public interface MockDsl {
     }
 
     default GenreID givenGenre(final String name, final boolean isActive, final List<CategoryID> categories) throws Exception {
-        final var categoriesMapped = mapTo(categories, (item) -> item.getValue().toString());
+        final var categoriesMapped = mapTo(categories, Identifier::toString);
         final var input = new CreateGenreRequest(name, categoriesMapped, isActive);
         final var id = this.given("/genres", input);
         return GenreID.from(id);
@@ -162,7 +160,7 @@ public interface MockDsl {
     }
 
     private <T> T retrieve(final String url, final Identifier id, final Class<T> clazz) throws Exception {
-        final var request = MockMvcRequestBuilders.get(url + "/" + id.getValue().toString()).contentType(MediaType.APPLICATION_JSON);
+        final var request = MockMvcRequestBuilders.get(url + "/" + id.toString()).contentType(MediaType.APPLICATION_JSON);
         final var json = this.mvc().perform(request)
           .andExpect(status().isOk())
           .andReturn()
@@ -171,12 +169,12 @@ public interface MockDsl {
     }
 
     private ResultActions delete(final String url, final Identifier id) throws Exception {
-        final var request = MockMvcRequestBuilders.delete(url + "/" + id.getValue().toString()).contentType(MediaType.APPLICATION_JSON);
+        final var request = MockMvcRequestBuilders.delete(url + "/" + id.toString()).contentType(MediaType.APPLICATION_JSON);
         return this.mvc().perform(request);
     }
 
     private ResultActions update(final String url, final Identifier id, final Object body) throws Exception {
-        final var request = MockMvcRequestBuilders.put(url + "/" + id.getValue().toString())
+        final var request = MockMvcRequestBuilders.put(url + "/" + id.toString())
           .contentType(MediaType.APPLICATION_JSON)
           .content(Json.writeValueAsString(body));
         return this.mvc().perform(request);

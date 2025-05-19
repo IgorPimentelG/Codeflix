@@ -14,7 +14,7 @@ public record VideoListOutput(
 
 	public static VideoListOutput from(final Video video) {
 		return new VideoListOutput(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  video.getTitle(),
 		  video.getDescription(),
 		  video.getCreatedAt(),

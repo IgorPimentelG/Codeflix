@@ -8,7 +8,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,15 +21,9 @@ public abstract class UseCaseTest implements BeforeEachCallback {
         Mockito.reset(getMocks().toArray());
     }
 
-    protected List<String> asStrings(final List<? extends Identifier> objects) {
-        return objects.stream()
-            .map(item -> item.getValue().toString())
-            .toList();
-    }
-
     protected Set<String> asStrings(final Set<? extends Identifier> objects) {
         return objects.stream()
-          .map(item -> item.getValue().toString())
+          .map(Identifier::toString)
           .collect(Collectors.toSet());
     }
 }

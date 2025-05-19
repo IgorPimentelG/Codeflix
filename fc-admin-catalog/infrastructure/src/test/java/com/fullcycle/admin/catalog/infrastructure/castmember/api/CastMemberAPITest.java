@@ -83,7 +83,7 @@ public class CastMemberAPITest {
           .andExpect(status().isCreated())
           .andExpect(header().string("Location", "/cast-members/" + expectedId.getValue()))
           .andExpect(header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.id", equalTo(expectedId.getValue().toString())));
+          .andExpect(jsonPath("$.id", equalTo(expectedId.toString())));
 
         verify(createCastMemberUseCase).execute(argThat(cmd ->
             Objects.equals(expectedName, cmd.name()) &&
@@ -129,14 +129,14 @@ public class CastMemberAPITest {
 
         when(getCastMemberByIdUseCase.execute(any())).thenReturn(CastMemberOutput.from(castMember));
 
-        final var request = MockMvcRequestBuilders.get("/cast-members/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.get("/cast-members/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON);
 
         mvc.perform(request)
           .andDo(print())
           .andExpect(status().isOk())
           .andExpect(header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.id", equalTo(expectedId.getValue().toString())))
+          .andExpect(jsonPath("$.id", equalTo(expectedId.toString())))
           .andExpect(jsonPath("$.name", equalTo(expectedName)))
           .andExpect(jsonPath("$.type", equalTo(expectedType.name())))
           .andExpect(jsonPath("$.created_at", equalTo(castMember.getCreatedAt().toString())));
@@ -147,11 +147,11 @@ public class CastMemberAPITest {
     @Test
     public void givenInvalidId_whenCallsGetById_shouldReturnNotFound() throws Exception {
         final var expectedId = CastMemberID.unique();
-        final var expectedErrorMessage = "CastMember with ID %s was not found".formatted(expectedId.getValue().toString());
+        final var expectedErrorMessage = "CastMember with ID %s was not found".formatted(expectedId.toString());
 
         when(getCastMemberByIdUseCase.execute(any())).thenThrow(NotFoundException.with(CastMember.class, expectedId));
 
-        final var request = MockMvcRequestBuilders.get("/cast-members/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.get("/cast-members/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON);
 
         mvc.perform(request)
@@ -174,7 +174,7 @@ public class CastMemberAPITest {
 
         when(updateCastMemberUseCase.execute(any())).thenReturn(UpdateCastMemberOutput.from(expectedId));
 
-        final var request = MockMvcRequestBuilders.put("/cast-members/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.put("/cast-members/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(command));
 
@@ -182,7 +182,7 @@ public class CastMemberAPITest {
           .andDo(print())
           .andExpect(status().isOk())
           .andExpect(header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.id", equalTo(expectedId.getValue().toString())));
+          .andExpect(jsonPath("$.id", equalTo(expectedId.toString())));
 
         verify(updateCastMemberUseCase).execute(argThat(cmd ->
           Objects.equals(expectedId.getValue(), cmd.id()) &&
@@ -204,7 +204,7 @@ public class CastMemberAPITest {
           .thenThrow(new NotificationException(Notification.create(new Error(expectedErrorMessage))));
 
 
-        final var request = MockMvcRequestBuilders.put("/cast-members/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.put("/cast-members/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(command));
 
@@ -232,7 +232,7 @@ public class CastMemberAPITest {
 
         when(updateCastMemberUseCase.execute(any())).thenThrow(NotFoundException.with(CastMember.class, expectedId));
 
-        final var request = MockMvcRequestBuilders.put("/cast-members/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.put("/cast-members/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(command));
 
@@ -255,7 +255,7 @@ public class CastMemberAPITest {
 
         doNothing().when(deleteCastMemberUseCase).execute(any());
 
-        final var request = MockMvcRequestBuilders.delete("/cast-members/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.delete("/cast-members/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON);
 
         mvc.perform(request)
@@ -297,7 +297,7 @@ public class CastMemberAPITest {
           .andExpect(jsonPath("$.per_page", equalTo(expectedPerPage)))
           .andExpect(jsonPath("$.total", equalTo(expectedTotal)))
           .andExpect(jsonPath("$.items", hasSize(expectedItemsCount)))
-          .andExpect(jsonPath("$.items[0].id", equalTo(castMember.getId().getValue().toString())))
+          .andExpect(jsonPath("$.items[0].id", equalTo(castMember.getId().toString())))
           .andExpect(jsonPath("$.items[0].name", equalTo(castMember.getName())))
           .andExpect(jsonPath("$.items[0].type", equalTo(castMember.getType().name())))
           .andExpect(jsonPath("$.items[0].created_at", equalTo(castMember.getCreatedAt().toString())));
@@ -344,7 +344,7 @@ public class CastMemberAPITest {
           .andExpect(jsonPath("$.per_page", equalTo(expectedPerPage)))
           .andExpect(jsonPath("$.total", equalTo(expectedTotal)))
           .andExpect(jsonPath("$.items", hasSize(expectedItemsCount)))
-          .andExpect(jsonPath("$.items[0].id", equalTo(castMember.getId().getValue().toString())))
+          .andExpect(jsonPath("$.items[0].id", equalTo(castMember.getId().toString())))
           .andExpect(jsonPath("$.items[0].name", equalTo(castMember.getName())))
           .andExpect(jsonPath("$.items[0].type", equalTo(castMember.getType().name())))
           .andExpect(jsonPath("$.items[0].created_at", equalTo(castMember.getCreatedAt().toString())));

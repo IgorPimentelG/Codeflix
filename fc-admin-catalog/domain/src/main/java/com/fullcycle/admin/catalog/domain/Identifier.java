@@ -4,4 +4,5 @@ import java.util.UUID;
 
 public abstract class Identifier {
     public abstract UUID getValue();
+    public abstract String toString();
 }

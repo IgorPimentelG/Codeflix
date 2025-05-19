@@ -192,7 +192,7 @@ public class CategoryE2ETest implements MockDsl {
 
        final var category = categoryRepository.findById(id.getValue()).get();
 
-        assertEquals(id.getValue().toString(), category.getId().toString());
+        assertEquals(id.toString(), category.getId().toString());
         assertEquals(expectedName, category.getName());
         assertEquals(expectedDescription, category.getDescription());
         assertEquals(expectedIsActive, category.isActive());

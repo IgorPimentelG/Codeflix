@@ -187,7 +187,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
         final String expectedName = null;
         final var expectedIsActive = true;
         final var expectedCategories = List.of(movies, series, documentations);
-        final var expectedErrorMessage1 = "Some categories could not be found: %s, %s".formatted(movies.getValue().toString(), series.getValue().toString());
+        final var expectedErrorMessage1 = "Some categories could not be found: %s, %s".formatted(movies.toString(), series.toString());
         final var expectedErrorMessage2 = "Name cannot be null";
         final var expectedErrorCount = 2;
 

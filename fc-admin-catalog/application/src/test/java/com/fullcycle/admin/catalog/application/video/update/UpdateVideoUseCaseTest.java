@@ -75,7 +75,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -149,7 +149,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -223,7 +223,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -297,7 +297,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -349,7 +349,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -401,7 +401,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -453,7 +453,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -505,7 +505,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -557,7 +557,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -613,7 +613,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -669,7 +669,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,
@@ -724,7 +724,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest  {
 		final var video = Fixture.Videos.video();
 
 		final var command = new UpdateVideoCommand(
-		  video.getId().getValue().toString(),
+		  video.getId().toString(),
 		  expectedTitle,
 		  expectedDescription,
 		  expectedLaunchedAt,

@@ -1,7 +1,6 @@
 package com.fullcycle.admin.catalog.infrastructure.video;
 
 import com.fullcycle.admin.catalog.domain.Identifier;
-import com.fullcycle.admin.catalog.domain.castmember.CastMemberID;
 import com.fullcycle.admin.catalog.domain.pagination.Pagination;
 import com.fullcycle.admin.catalog.domain.pagination.VideoSearchQuery;
 import com.fullcycle.admin.catalog.domain.video.Video;
@@ -9,7 +8,7 @@ import com.fullcycle.admin.catalog.domain.video.VideoGateway;
 import com.fullcycle.admin.catalog.domain.video.VideoID;
 import com.fullcycle.admin.catalog.infrastructure.utils.SQLUtils;
 import com.fullcycle.admin.catalog.infrastructure.video.persistence.VideoJpaEntity;
-import com.fullcycle.admin.catalog.infrastructure.video.persistence.VideoPreview;
+import com.fullcycle.admin.catalog.domain.video.VideoPreview;
 import com.fullcycle.admin.catalog.infrastructure.video.persistence.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -18,8 +17,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+
+import static com.fullcycle.admin.catalog.domain.utils.CollectionUtils.mapTo;
+import static com.fullcycle.admin.catalog.domain.utils.CollectionUtils.emptyIfNull;
 
 @Component
 @RequiredArgsConstructor
@@ -64,9 +64,9 @@ public class VideoMySQLGateway implements VideoGateway {
 
 		final var videos = videoRepository.findAll(
 		  SQLUtils.like(query.terms()),
-		  toString(query.categories()),
-		  toString(query.genres()),
-		  toString(query.castMembers()),
+		  emptyIfNull(mapTo(query.categories(), Identifier::toString)),
+		  emptyIfNull(mapTo(query.genres(), Identifier::toString)),
+		  emptyIfNull(mapTo(query.castMembers(), Identifier::toString)),
 		  page
 		);
 
@@ -80,13 +80,5 @@ public class VideoMySQLGateway implements VideoGateway {
 
 	private Video save(final Video video) {
 		return videoRepository.save(VideoJpaEntity.from(video)).toAggregate();
-	}
-
-	private Set<String> toString(final Set<? extends Identifier> ids) {
-		if (ids == null || ids.isEmpty()) {
-			return null;
-		}
-
-		return ids.stream().map(it -> it.getValue().toString()).collect(Collectors.toSet());
 	}
 }

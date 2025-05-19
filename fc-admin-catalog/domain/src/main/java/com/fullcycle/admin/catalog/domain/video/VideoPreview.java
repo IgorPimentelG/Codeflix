@@ -1,4 +1,4 @@
-package com.fullcycle.admin.catalog.infrastructure.video.persistence;
+package com.fullcycle.admin.catalog.domain.video;
 
 import java.time.Instant;
 import java.util.UUID;

@@ -214,7 +214,7 @@ public class GenreE2ETest implements MockDsl {
 
         final var genre = genreRepository.findById(id.getValue()).get();
 
-        assertEquals(id.getValue().toString(), genre.getId().toString());
+        assertEquals(id.toString(), genre.getId().toString());
         assertEquals(expectedName, genre.getName());
         assertEquals(expectedIsActive, genre.isActive());
         assertEquals(expectedCategories.size(), genre.getCategories().size());

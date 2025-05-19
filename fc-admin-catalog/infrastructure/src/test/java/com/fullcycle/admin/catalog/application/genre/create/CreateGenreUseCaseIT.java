@@ -131,7 +131,7 @@ public class CreateGenreUseCaseIT {
         final var expectedName = " ";
         final var expectedIsActive = true;
         final var expectedCategories = List.of(movies, series);
-        final var expectedErrorMessage1 = "Some categories could not be found: %s, %s".formatted(movies.getValue().toString(), series.getValue().toString());
+        final var expectedErrorMessage1 = "Some categories could not be found: %s, %s".formatted(movies.toString(), series.toString());
         final var expectedErrorMessage2 = "Name cannot be empty";
         final var expectedErrorCount = 2;
 

@@ -25,7 +25,7 @@ public class CastMemberListResponseTest {
         final var expectedCreatedAt = Instant.now();
 
         final var response = new CastMemberListResponse(
-          expectedId.getValue().toString(),
+          expectedId.toString(),
           expectedName,
           expectedType,
           expectedCreatedAt

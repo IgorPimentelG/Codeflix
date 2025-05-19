@@ -151,7 +151,7 @@ public class UpdateGenreUseCaseIT {
         final String expectedName = null;
         final var expectedIsActive = true;
         final var expectedCategories = List.of(movies.getId(), series, documentations);
-        final var expectedErrorMessage1 = "Some categories could not be found: %s, %s".formatted(series.getValue().toString(), documentations.getValue().toString());
+        final var expectedErrorMessage1 = "Some categories could not be found: %s, %s".formatted(series.toString(), documentations.toString());
         final var expectedErrorMessage2 = "Name cannot be null";
         final var expectedErrorCount = 2;
 

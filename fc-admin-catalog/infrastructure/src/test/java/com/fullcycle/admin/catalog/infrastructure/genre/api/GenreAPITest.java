@@ -84,9 +84,9 @@ public class GenreAPITest {
         final var response = mvc.perform(request).andDo(print());
 
         response.andExpect(status().isCreated())
-          .andExpect(header().string("Location", "/genres/" + expectedId.getValue().toString()))
+          .andExpect(header().string("Location", "/genres/" + expectedId.toString()))
           .andExpect(header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.genre_id", equalTo(expectedId.getValue().toString())));
+          .andExpect(jsonPath("$.genre_id", equalTo(expectedId.toString())));
 
         verify(createGenreUseCase).execute(argThat(cmd ->
           Objects.equals(expectedName, cmd.name()) &&
@@ -137,7 +137,7 @@ public class GenreAPITest {
 
         when(getGenreByIdUseCase.execute(any())).thenReturn(GenreOutput.from(genre));
 
-        final var request = MockMvcRequestBuilders.get("/genres/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.get("/genres/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON)
           .accept(MediaType.APPLICATION_JSON);
 
@@ -145,7 +145,7 @@ public class GenreAPITest {
 
         response.andExpect(status().isOk())
           .andExpect(header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.id", equalTo(expectedId.getValue().toString())))
+          .andExpect(jsonPath("$.id", equalTo(expectedId.toString())))
           .andExpect(jsonPath("$.name", equalTo(expectedName)))
           .andExpect(jsonPath("$.is_active", equalTo(expectedIsActive)))
           .andExpect(jsonPath("$.categories_id", equalTo(expectedCategories.stream().map(UUID::toString).toList())))
@@ -188,16 +188,16 @@ public class GenreAPITest {
 
         final var input = new UpdateGenreRequest(expectedName, expectedCategories, expectedIsActive);
 
-        final var request = MockMvcRequestBuilders.put("/genres/{id}", expectedId.getValue().toString())
+        final var request = MockMvcRequestBuilders.put("/genres/{id}", expectedId.toString())
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(input));
 
         final var response = mvc.perform(request).andDo(print());
 
         response.andExpect(status().isCreated())
-          .andExpect(header().string("Location", "/genres/" + expectedId.getValue().toString()))
+          .andExpect(header().string("Location", "/genres/" + expectedId.toString()))
           .andExpect(header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.id", equalTo(expectedId.getValue().toString())));
+          .andExpect(jsonPath("$.id", equalTo(expectedId.toString())));
 
         verify(updateGenreUseCase).execute(argThat(cmd ->
           Objects.equals(expectedName, cmd.name()) &&
@@ -254,7 +254,7 @@ public class GenreAPITest {
           .andExpect(jsonPath("$.current_page", equalTo(expectedPage)))
           .andExpect(jsonPath("$.total", equalTo(expectedTotal)))
           .andExpect(jsonPath("$.items", hasSize(expectedItemsCount)))
-          .andExpect(jsonPath("$.items[0].id", equalTo(genre.getId().getValue().toString())))
+          .andExpect(jsonPath("$.items[0].id", equalTo(genre.getId().toString())))
           .andExpect(jsonPath("$.items[0].name", equalTo(genre.getName())))
           .andExpect(jsonPath("$.items[0].is_active", equalTo(genre.isActive())))
           .andExpect(jsonPath("$.items[0].created_at", equalTo(genre.getCreatedAt().toString())))
