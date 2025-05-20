@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface VideoRepository extends JpaRepository<VideoJpaEntity, UUID> {
 
 	@Query("""
-		SELECT new com.fullcycle.admin.catalog.infrastructure.video.persistence.VideoPreview(
+		SELECT new com.fullcycle.admin.catalog.domain.video.VideoPreview(
 			v.id as id,
 			v.title as title,
 			v.description as description,
@@ -21,17 +21,17 @@ public interface VideoRepository extends JpaRepository<VideoJpaEntity, UUID> {
 			v.updatedAt as updatedAt
 		)
 		FROM Video v
-			JOIN v.castMembers cm
-			JOIN v.categories c
-			JOIN v.genres g
+			LEFT JOIN v.castMembers members
+			LEFT JOIN v.categories categories
+			LEFT JOIN v.genres genres
 		WHERE
 			( :terms IS NULL OR UPPER(v.title) LIKE :terms )
 		AND
-			( :castMembers IS NULL OR castMembers.id.castMemberId in :castMembers )
+			( :castMembers IS NULL OR members.id.castMemberID in :castMembers )
 		AND
-			( :genres IS NULL OR genres.id.genreId in :genres )
+			( :genres IS NULL OR genres.id.genreID in :genres )
 		AND
-			( :categories IS NULL OR categories.id.categoryId in :categories )
+			( :categories IS NULL OR categories.id.categoryID in :categories )
 	""")
 	Page<VideoPreview> findAll(
 	  @Param("terms") String terms,

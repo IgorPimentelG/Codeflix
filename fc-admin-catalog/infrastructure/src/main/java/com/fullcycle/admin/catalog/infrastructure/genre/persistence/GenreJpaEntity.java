@@ -17,7 +17,7 @@ import java.util.UUID;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.EAGER;
 
-@Entity
+@Entity(name = "Genre")
 @Table(name = "genres")
 @Data
 @NoArgsConstructor
