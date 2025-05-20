@@ -64,7 +64,7 @@ public class CastMemberE2ETest implements MockDsl {
     @Test
     public void asCatalogAdminShouldBeAbleToCreateNewCastMemberWithValidValues() throws Exception {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var castMemberId = givenCastMember(expectedName, expectedType);
 
@@ -79,7 +79,7 @@ public class CastMemberE2ETest implements MockDsl {
     @Test
     public void asCatalogAdminShouldBeAbleTosEEaTreatedErrorByCreatingNewCastMemberWithInvalidValues() throws Exception {
         final String expectedName = null;
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var expectedErrorMessage = "Name cannot be null";
 
         givenCastMemberResult(expectedName, expectedType)
@@ -91,9 +91,9 @@ public class CastMemberE2ETest implements MockDsl {
 
     @Test
     public void asCatalogAdminShouldBeAbleToNavigateToAllCastMembers() throws Exception {
-        givenCastMember("any name 1", Fixture.CastMember.type());
-        givenCastMember("any name 2", Fixture.CastMember.type());
-        givenCastMember("any name 3", Fixture.CastMember.type());
+        givenCastMember("any name 1", Fixture.CastMembers.type());
+        givenCastMember("any name 2", Fixture.CastMembers.type());
+        givenCastMember("any name 3", Fixture.CastMembers.type());
 
         listCastMembers(0, 1)
           .andExpect(status().isOk())
@@ -129,9 +129,9 @@ public class CastMemberE2ETest implements MockDsl {
 
     @Test
     public void asCatalogAdminShouldBeAbleToSearchBetweenAllCastMembers() throws Exception {
-        givenCastMember("any name 1", Fixture.CastMember.type());
-        givenCastMember("any name 2", Fixture.CastMember.type());
-        givenCastMember("any name 3", Fixture.CastMember.type());
+        givenCastMember("any name 1", Fixture.CastMembers.type());
+        givenCastMember("any name 2", Fixture.CastMembers.type());
+        givenCastMember("any name 3", Fixture.CastMembers.type());
 
         listCastMembers(0, 1, "1")
           .andExpect(status().isOk())
@@ -144,9 +144,9 @@ public class CastMemberE2ETest implements MockDsl {
 
     @Test
     public void asCatalogAdminShouldBeAbleToSortAllCastMemberByNameDesc() throws Exception {
-        givenCastMember("any name 1", Fixture.CastMember.type());
-        givenCastMember("any name 2", Fixture.CastMember.type());
-        givenCastMember("any name 3", Fixture.CastMember.type());
+        givenCastMember("any name 1", Fixture.CastMembers.type());
+        givenCastMember("any name 2", Fixture.CastMembers.type());
+        givenCastMember("any name 3", Fixture.CastMembers.type());
 
         listCastMembers(0, 3, "desc", "", "name")
           .andExpect(status().isOk())
@@ -163,7 +163,7 @@ public class CastMemberE2ETest implements MockDsl {
     @Test
     public void asCatalogAdminShouldBeAbleToGetCastMemberByItsIdentifier() throws Exception {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var castMemberId = givenCastMember(expectedName, expectedType);
 
         final var castMember = retrieveCastMember(castMemberId);
@@ -190,8 +190,8 @@ public class CastMemberE2ETest implements MockDsl {
     @Test
     public void asCatalogAdminShouldBeAbleToUpdateCastMemberByItsIdentifier() throws Exception {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
-        final var castMemberId = givenCastMember(Fixture.name(), Fixture.CastMember.type());
+        final var expectedType = Fixture.CastMembers.type();
+        final var castMemberId = givenCastMember(Fixture.name(), Fixture.CastMembers.type());
 
         final var input = new UpdateCastMemberRequest(expectedName, expectedType);
 
@@ -208,7 +208,7 @@ public class CastMemberE2ETest implements MockDsl {
 
     @Test
     public void asCategoryAdminShouldBeAbleToDeleteCastMemberByItsIdentifier() throws Exception {
-        final var castMemberId = givenCastMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMemberId = givenCastMember(Fixture.name(), Fixture.CastMembers.type());
         deleteCastMember(castMemberId).andExpect(status().isNoContent());
         assertFalse(castMemberRepository.existsById(castMemberId.getValue()));
     }

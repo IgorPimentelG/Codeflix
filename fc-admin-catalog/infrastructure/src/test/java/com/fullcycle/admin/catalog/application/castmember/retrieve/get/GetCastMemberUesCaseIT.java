@@ -31,7 +31,7 @@ public class GetCastMemberUesCaseIT {
     @Test
     public void givenValidId_whenCallsGetCastMember_shouldReturnIt() {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var castMember = CastMember.newMember(expectedName, expectedType);
         final var expectedId = castMember.getId();

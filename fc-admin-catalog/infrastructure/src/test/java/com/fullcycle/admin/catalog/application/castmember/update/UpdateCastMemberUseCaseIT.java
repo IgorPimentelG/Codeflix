@@ -39,7 +39,7 @@ public class UpdateCastMemberUseCaseIT {
 
         final var expectedId = castMember.getId();
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var command = UpdateCastMemberCommand.with(expectedId.getValue(), expectedName, expectedType);
         final var output = useCase.execute(command);
@@ -63,7 +63,7 @@ public class UpdateCastMemberUseCaseIT {
 
         final var expectedId = castMember.getId();
         final String expectedName = null;
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "Name cannot be null";
 
@@ -105,7 +105,7 @@ public class UpdateCastMemberUseCaseIT {
     public void givenInvalidId_whenCallsUpdateCastMember_shouldThrowsNotification() {
         final var expectedId = CastMemberID.unique();
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var expectedErrorMessage = "CastMember with ID %s was not found".formatted(expectedId.getValue());
 
         final var command = UpdateCastMemberCommand.with(expectedId.getValue(), expectedName, expectedType);

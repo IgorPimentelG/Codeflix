@@ -21,7 +21,7 @@ public class CastMemberResponseTest {
     public void testMarshall() throws IOException {
         final var expectedId = CastMemberID.unique();
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var expectedCreatedAt = Instant.now();
         final var expectedUpdatedAt = Instant.now();
 
@@ -41,7 +41,7 @@ public class CastMemberResponseTest {
     public void testUnmarshall() throws IOException {
         final var expectedId = CastMemberID.unique();
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var expectedCreatedAt = Instant.now();
         final var expectedUpdatedAt = Instant.now();
 

@@ -7,12 +7,15 @@ import com.fullcycle.admin.catalog.domain.genre.Genre;
 import com.fullcycle.admin.catalog.domain.video.Rating;
 import com.fullcycle.admin.catalog.domain.video.Resource;
 import com.fullcycle.admin.catalog.domain.video.Video;
+import com.fullcycle.admin.catalog.domain.video.VideoPreview;
 import com.github.javafaker.Faker;
 import io.vavr.API;
 
+import java.time.Instant;
 import java.time.Year;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.UUID;
 
 import static io.vavr.API.*;
 
@@ -44,6 +47,10 @@ public final class Fixture {
         return FAKER.bool().bool();
     }
 
+    public static Instant instant() {
+        return FAKER.date().birthday().toInstant();
+    }
+
     public static final class CastMembers {
 
         private static final CastMember CAST_MEMBER = CastMember.newMember(Fixture.name(), type());
@@ -72,6 +79,16 @@ public final class Fixture {
               Set.of(Categories.category().getId()),
               Set.of(Genres.genre().getId()),
               Set.of(CastMembers.castMember().getId())
+            );
+        }
+
+        public static VideoPreview videoPreview() {
+            return new VideoPreview(
+              UUID.randomUUID(),
+              Fixture.title(),
+              Fixture.description(),
+              Fixture.instant(),
+              Fixture.instant()
             );
         }
 

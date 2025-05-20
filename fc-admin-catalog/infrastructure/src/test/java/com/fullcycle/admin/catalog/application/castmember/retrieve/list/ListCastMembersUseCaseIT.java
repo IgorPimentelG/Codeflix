@@ -35,8 +35,8 @@ public class ListCastMembersUseCaseIT {
     @Test
     public void givenValidQuery_whenCallsListCastMember_shouldReturnAll() {
         final var castMembers = List.of(
-                CastMember.newMember(Fixture.name(), Fixture.CastMember.type()),
-                CastMember.newMember(Fixture.name(), Fixture.CastMember.type())
+                CastMember.newMember(Fixture.name(), Fixture.CastMembers.type()),
+                CastMember.newMember(Fixture.name(), Fixture.CastMembers.type())
         );
 
         castMemberRepository.saveAllAndFlush(castMembers.stream().map(CastMemberJpaEntity::from).toList());

@@ -29,7 +29,7 @@ public class CastMemberMySQLGatewayTest {
     @Test
     public void givenValidCastMember_whenCallsCreate_shouldPersistIt() {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var castMember = CastMember.newMember(expectedName, expectedType);
         final var expectedId = castMember.getId();
 
@@ -56,7 +56,7 @@ public class CastMemberMySQLGatewayTest {
     @Test
     public void givenValidCastMember_whenCallsUpdate_shouldRefreshIt() {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var castMember = CastMember.newMember("any name", CastMemberType.DIRECTOR);
         final var expectedId = castMember.getId();
 
@@ -85,7 +85,7 @@ public class CastMemberMySQLGatewayTest {
 
     @Test
     public void givenValidCastMember_whenCallsDeleteById_shouldRemoveIt() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
         final var expectedId = castMember.getId();
 
         castMemberRepository.saveAndFlush(CastMemberJpaEntity.from(castMember));
@@ -98,7 +98,7 @@ public class CastMemberMySQLGatewayTest {
 
     @Test
     public void givenInvalidCastMemberId_whenCallsDeleteById_shouldDoNothing() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
 
         castMemberRepository.saveAndFlush(CastMemberJpaEntity.from(castMember));
         assertEquals(1, castMemberRepository.count());
@@ -111,7 +111,7 @@ public class CastMemberMySQLGatewayTest {
     @Test
     public void givenValidCastMember_whenCallsFindById_shouldReturnIt() {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
         final var castMember = CastMember.newMember(expectedName, expectedType);
         final var expectedId = castMember.getId();
 
@@ -137,7 +137,7 @@ public class CastMemberMySQLGatewayTest {
 
     @Test
     public void givenInvalidId_whenCallsFindById_shouldReturnEmpty() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
 
         castMemberRepository.saveAndFlush(CastMemberJpaEntity.from(castMember));
         assertEquals(1, castMemberRepository.count());

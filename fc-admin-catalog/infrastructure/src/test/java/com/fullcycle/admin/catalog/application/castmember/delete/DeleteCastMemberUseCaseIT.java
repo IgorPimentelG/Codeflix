@@ -30,7 +30,7 @@ public class DeleteCastMemberUseCaseIT {
 
     @Test
     public void givenValidId_whenCallsDeleteCastMember_shouldDeleteIt() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
         final var expectedId = castMember.getId();
 
         castMemberRepository.save(CastMemberJpaEntity.from(castMember));
@@ -49,7 +49,7 @@ public class DeleteCastMemberUseCaseIT {
 
     @Test
     public void givenValidId_whenCallsDeleteCastMemberAndGatewayThrowsException_shouldReceiveException() {
-        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMember.type());
+        final var castMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
         final var expectedId = castMember.getId();
 
         castMemberRepository.save(CastMemberJpaEntity.from(castMember));

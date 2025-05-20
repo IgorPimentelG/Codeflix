@@ -18,7 +18,7 @@ public class CreateCastMemberRequestTest {
     @Test
     public void testMarshall() throws IOException {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var response = new CreateCastMemberRequest(expectedName, expectedType);
 
@@ -32,7 +32,7 @@ public class CreateCastMemberRequestTest {
     @Test
     public void testUnmarshall() throws IOException {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var content = """
           {
