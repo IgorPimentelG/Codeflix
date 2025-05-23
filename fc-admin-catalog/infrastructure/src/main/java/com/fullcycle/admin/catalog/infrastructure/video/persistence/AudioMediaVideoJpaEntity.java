@@ -33,7 +33,7 @@ public class AudioMediaVideoJpaEntity {
 	@Column(name = "encoded_path", nullable = false)
 	private String encodedPath;
 
-	@Column(nullable = false)
+	@Column(name = "status", nullable = false)
 	private MediaStatus status;
 
 	public static AudioMediaVideoJpaEntity from(final AudioVideoMedia media) {
