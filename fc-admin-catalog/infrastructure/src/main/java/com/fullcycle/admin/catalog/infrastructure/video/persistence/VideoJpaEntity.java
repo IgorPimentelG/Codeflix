@@ -7,8 +7,9 @@ import com.fullcycle.admin.catalog.domain.video.Rating;
 import com.fullcycle.admin.catalog.domain.video.Video;
 import com.fullcycle.admin.catalog.domain.video.VideoID;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -20,7 +21,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "videos")
 @Entity(name = "Video")
@@ -46,7 +48,7 @@ public class VideoJpaEntity {
 	@Column(name = "published")
 	private boolean published;
 
-	@Enumerated(EnumType.STRING)
+	@Column(name = "rating")
 	private Rating rating;
 
 	@Column(precision = 2)
@@ -58,33 +60,33 @@ public class VideoJpaEntity {
 	@Column(name = "updated_at", columnDefinition = "DATETIME(6)")
 	private Instant updatedAt;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "video_id")
 	private AudioMediaVideoJpaEntity video;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "trailer_id")
 	private AudioMediaVideoJpaEntity trailer;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "banner_id")
 	private ImageMediaJpaEntity banner;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "thumbnail_id")
 	private ImageMediaJpaEntity thumbnail;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "thumbnail_half_id")
 	private ImageMediaJpaEntity thumbnailHalf;
 
-	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
 	private Set<VideoCategoryJpaEntity> categories;
 
-	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
 	private Set<VideoGenreJpaEntity> genres;
 
-	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
 	private Set<VideoCastMemberJpaEntity> castMembers;
 
 	public VideoJpaEntity(
