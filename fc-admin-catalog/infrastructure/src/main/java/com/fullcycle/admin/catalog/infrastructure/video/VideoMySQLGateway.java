@@ -63,7 +63,7 @@ public class VideoMySQLGateway implements VideoGateway {
 		);
 
 		final var videos = videoRepository.findAll(
-		  SQLUtils.like(query.terms()),
+		  SQLUtils.like(SQLUtils.upper(query.terms())),
 		  emptyIfNull(mapTo(query.categories(), Identifier::toString)),
 		  emptyIfNull(mapTo(query.genres(), Identifier::toString)),
 		  emptyIfNull(mapTo(query.castMembers(), Identifier::toString)),
