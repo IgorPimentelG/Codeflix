@@ -1,8 +1,7 @@
 package com.fullcycle.admin.catalog.infrastructure.service.local;
 
-import com.fullcycle.admin.catalog.domain.video.Resource;
+import com.fullcycle.admin.catalog.domain.resource.Resource;
 import com.fullcycle.admin.catalog.infrastructure.service.StorageService;
-import lombok.Getter;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -76,11 +76,11 @@ public class DefaultUpdateVideoUseCase extends UpdateVideoUseCase {
 		final var id = video.getId();
 
 		try {
-			final var videoMedia = command.getVideo().map(it -> mediaResourceGateway.storeAudioVideo(id, it)).orElse(null);
-			final var trailerMedia = command.getTrailer().map(it -> mediaResourceGateway.storeAudioVideo(id, it)).orElse(null);
-			final var bannerMedia = command.getBanner().map(it -> mediaResourceGateway.storeImage(id, it)).orElse(null);
-			final var thumbnailMedia = command.getThumbnail().map(it -> mediaResourceGateway.storeImage(id, it)).orElse(null);
-			final var thumbnailHalfMedia = command.getThumbnailHalf().map(it -> mediaResourceGateway.storeImage(id, it)).orElse(null);
+			final var videoMedia = command.getVideo().map(it -> mediaResourceGateway.storeAudioVideo(id, VideoResource.with(it, VideoMediaType.VIDEO))).orElse(null);
+			final var trailerMedia = command.getTrailer().map(it -> mediaResourceGateway.storeAudioVideo(id, VideoResource.with(it, VideoMediaType.TRAILER))).orElse(null);
+			final var bannerMedia = command.getBanner().map(it -> mediaResourceGateway.storeImage(id, VideoResource.with(it, VideoMediaType.BANNER))).orElse(null);
+			final var thumbnailMedia = command.getThumbnail().map(it -> mediaResourceGateway.storeImage(id, VideoResource.with(it, VideoMediaType.THUMBNAIL))).orElse(null);
+			final var thumbnailHalfMedia = command.getThumbnailHalf().map(it -> mediaResourceGateway.storeImage(id, VideoResource.with(it, VideoMediaType.THUMBNAIL_HALF))).orElse(null);
 
 			video.setVideo(videoMedia);
 			video.setTrailer(trailerMedia);

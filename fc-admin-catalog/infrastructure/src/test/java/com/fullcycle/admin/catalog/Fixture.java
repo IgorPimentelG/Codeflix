@@ -5,13 +5,15 @@ import com.fullcycle.admin.catalog.domain.castmember.CastMemberType;
 import com.fullcycle.admin.catalog.domain.category.Category;
 import com.fullcycle.admin.catalog.domain.genre.Genre;
 import com.fullcycle.admin.catalog.domain.video.Rating;
-import com.fullcycle.admin.catalog.domain.video.Resource;
+import com.fullcycle.admin.catalog.domain.resource.Resource;
 import com.fullcycle.admin.catalog.domain.video.Video;
+import com.fullcycle.admin.catalog.domain.video.VideoMediaType;
 import com.github.javafaker.Faker;
 import io.vavr.API;
 
 import java.time.Year;
 import java.util.Set;
+import java.util.UUID;
 
 import static io.vavr.API.*;
 import static io.vavr.API.$;
@@ -76,14 +78,15 @@ public final class Fixture {
             );
         }
 
-        public static Resource resource(final Resource.Type type) {
+        public static Resource resource(final VideoMediaType type) {
             final String contentType = API.Match(type).of(
-              Case($(List(Resource.Type.VIDEO, Resource.Type.TRAILER)::contains), "video/mp4"),
+              Case($(List(VideoMediaType.VIDEO, VideoMediaType.TRAILER)::contains), "video/mp4"),
               Case($(), () -> "image/jpg")
             );
 
-            final byte[] content = "Conteudo".getBytes();
-            return Resource.with(content, contentType, type.name().toLowerCase(), type);
+            final String checksum = UUID.randomUUID().toString();
+            final byte[] content = "content".getBytes();
+            return Resource.with(checksum, content, contentType, type.name().toLowerCase());
         }
 
         public static Rating rating() {

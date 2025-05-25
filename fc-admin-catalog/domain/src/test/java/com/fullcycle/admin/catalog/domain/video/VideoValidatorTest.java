@@ -28,7 +28,7 @@ public class VideoValidatorTest {
         final var expectedCastMember = Set.of(CastMemberID.unique());
 
         final var expectedErrorCount = 1;
-        final var expectedErrorMessage = "Name cannot be null";
+        final var expectedErrorMessage = "Title cannot be null";
 
         final var video = Video.newVideo(
           expectedTitle,
@@ -65,7 +65,7 @@ public class VideoValidatorTest {
         final var expectedCastMember = Set.of(CastMemberID.unique());
 
         final var expectedErrorCount = 1;
-        final var expectedErrorMessage = "Name cannot be empty";
+            final var expectedErrorMessage = "Title cannot be empty";
 
         final var video = Video.newVideo(
           expectedTitle,
@@ -107,7 +107,7 @@ public class VideoValidatorTest {
         final var expectedCastMember = Set.of(CastMemberID.unique());
 
         final var expectedErrorCount = 1;
-        final var expectedErrorMessage = "Name must be between 1 and 255 characters";
+        final var expectedErrorMessage = "Title must be between 1 and 255 characters";
 
         final var video = Video.newVideo(
           expectedTitle,
