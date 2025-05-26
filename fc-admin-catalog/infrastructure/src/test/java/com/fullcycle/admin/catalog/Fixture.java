@@ -8,6 +8,7 @@ import com.fullcycle.admin.catalog.domain.video.Rating;
 import com.fullcycle.admin.catalog.domain.resource.Resource;
 import com.fullcycle.admin.catalog.domain.video.Video;
 import com.fullcycle.admin.catalog.domain.video.VideoMediaType;
+import com.fullcycle.admin.catalog.infrastructure.utils.ChecksumUtils;
 import com.github.javafaker.Faker;
 import io.vavr.API;
 
@@ -84,8 +85,8 @@ public final class Fixture {
               Case($(), () -> "image/jpg")
             );
 
-            final String checksum = UUID.randomUUID().toString();
             final byte[] content = "content".getBytes();
+            final String checksum = ChecksumUtils.generate(content);
             return Resource.with(checksum, content, contentType, type.name().toLowerCase());
         }
 

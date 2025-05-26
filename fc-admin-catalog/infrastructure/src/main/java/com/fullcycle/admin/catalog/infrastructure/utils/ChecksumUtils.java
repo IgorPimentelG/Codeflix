@@ -1,14 +1,13 @@
 package com.fullcycle.admin.catalog.infrastructure.utils;
 
+import com.google.common.hash.Hashing;
+
 public final class ChecksumUtils {
 
 	private ChecksumUtils() {}
 
 	public static String generate(final byte[] bytes) {
-		int sum = 0;
-		for (byte b : bytes) {
-			sum += b;
-		}
-		return Integer.toHexString(sum);
+		final int hash = Hashing.crc32c().hashBytes(bytes).asInt();
+		return Integer.toHexString(hash);
 	}
 }
