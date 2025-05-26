@@ -79,6 +79,10 @@ public final class Fixture {
             );
         }
 
+        public static VideoMediaType mediaType() {
+            return FAKER.options().option(VideoMediaType.values());
+        }
+
         public static Resource resource(final VideoMediaType type) {
             final String contentType = API.Match(type).of(
               Case($(List(VideoMediaType.VIDEO, VideoMediaType.TRAILER)::contains), "video/mp4"),
