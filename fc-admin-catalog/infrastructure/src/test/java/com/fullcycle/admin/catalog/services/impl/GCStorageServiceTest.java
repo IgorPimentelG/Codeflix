@@ -19,6 +19,7 @@ import java.util.UUID;
 
 import static com.google.cloud.storage.Storage.BlobListOption.prefix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -85,6 +86,17 @@ public class GCStorageServiceTest {
 		verify(storage, times(1)).get(eq(bucket), eq(expectedName));
 		assertEquals(expectedSource.checksum(), resource.checksum());
 		assertEquals(expectedSource.contentType(), resource.contentType());
+	}
+
+	@Test
+	public void givenInvalidResource_whenCallsGet_shouldRetrieveEmpty() {
+		final var expectedName = Fixture.name();
+
+		doReturn(null).when(storage).get(anyString(), anyString());
+
+		final var resource = target.get(expectedName);
+
+		assertTrue(resource.isEmpty());
 	}
 
 	@Test

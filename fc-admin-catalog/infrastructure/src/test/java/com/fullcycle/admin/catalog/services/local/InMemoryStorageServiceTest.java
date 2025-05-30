@@ -3,8 +3,8 @@ package com.fullcycle.admin.catalog.services.local;
 import com.fullcycle.admin.catalog.Fixture;
 import com.fullcycle.admin.catalog.domain.video.VideoMediaType;
 import com.fullcycle.admin.catalog.infrastructure.service.local.InMemoryStorageService;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

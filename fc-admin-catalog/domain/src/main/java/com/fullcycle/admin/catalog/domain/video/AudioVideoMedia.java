@@ -46,6 +46,26 @@ public class AudioVideoMedia extends ValueObject {
         return new AudioVideoMedia(checksum, name, rawLocation, "", MediaStatus.PENDING);
     }
 
+    public AudioVideoMedia processing() {
+        return AudioVideoMedia.with(
+          checksum,
+          name,
+          rawLocation,
+          encodedLocation,
+          MediaStatus.PROCESSING
+        );
+    }
+
+    public AudioVideoMedia completed(final String encodedLocation) {
+        return AudioVideoMedia.with(
+          checksum,
+          name,
+          rawLocation,
+          encodedLocation,
+          MediaStatus.COMPLETED
+        );
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

@@ -6,6 +6,8 @@ import com.fullcycle.admin.catalog.infrastructure.configuration.properties.Stora
 import com.fullcycle.admin.catalog.infrastructure.service.StorageService;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class VideoMediaResourceGateway implements MediaResourceGateway {
 
@@ -21,7 +23,7 @@ public class VideoMediaResourceGateway implements MediaResourceGateway {
 
 	@Override
 	public AudioVideoMedia storeAudioVideo(final VideoID id, final VideoResource resource) {
-		final var filePath = filePath(id, resource);
+		final var filePath = filePath(id, resource.type());
 		final var content = resource.resource();
 		store(filePath, content);
 		return AudioVideoMedia.with(content.checksum(), content.name(), filePath);
@@ -29,10 +31,15 @@ public class VideoMediaResourceGateway implements MediaResourceGateway {
 
 	@Override
 	public ImageMedia storeImage(VideoID id, VideoResource resource) {
-		final var filePath = filePath(id, resource);
+		final var filePath = filePath(id, resource.type());
 		final var content = resource.resource();
 		store(filePath, content);
 		return ImageMedia.with(content.checksum(), content.name(), filePath);
+	}
+
+	@Override
+	public Optional<Resource> getResource(VideoID id, VideoMediaType type) {
+		return storageService.get(filePath(id, type));
 	}
 
 	@Override
@@ -45,8 +52,8 @@ public class VideoMediaResourceGateway implements MediaResourceGateway {
 		storageService.store(filePath, content);
 	}
 
-	private String filePath(final VideoID id, final VideoResource resource) {
-		return folder(id).concat("/").concat(filename(resource.type()));
+	private String filePath(final VideoID id, final VideoMediaType type) {
+		return folder(id).concat("/").concat(filename(type));
 	}
 
 	private String filename(final VideoMediaType type) {

@@ -69,7 +69,7 @@ class VideoMediaResourceGatewayTest {
 	}
 
 	@Test
-	public void givenValidResource_whenCallsCallsClearResources_shouldDeleteAll() {
+	public void givenValidResource_whenCallsClearResources_shouldDeleteAll() {
 		final var videoOne = VideoID.unique();
 		final var videoTwo = VideoID.unique();
 
@@ -92,6 +92,42 @@ class VideoMediaResourceGatewayTest {
 		assertEquals(2, storageService().storage().size());
 		final var keys = storageService().storage().keySet();
 		assertTrue(expectedValues.size() == keys.size() && keys.containsAll(expectedValues));
+	}
+
+	@Test
+	public void givenValidVideoID_whenCallsGetResource_shouldReturnIt() {
+		final var video = VideoID.unique();
+		final var expectedType = VideoMediaType.VIDEO;
+		final var expectedResource = Fixture.Videos.resource(Fixture.Videos.mediaType());
+
+		final var expectedValues = new ArrayList<String>();
+		expectedValues.add("videoId-%s/type-%s".formatted(video.toString(), expectedType.name()));
+		expectedValues.add("videoId-%s/type-%s".formatted(video.toString(), VideoMediaType.BANNER.name()));
+		expectedValues.add("videoId-%s/type-%s".formatted(video.toString(), VideoMediaType.TRAILER.name()));
+
+		expectedValues.forEach(id -> storageService().store(id, expectedResource));
+
+		final var resource = mediaResourceGateway.getResource(video, expectedType).get();
+
+		assertEquals(expectedResource, resource);
+	}
+
+	@Test
+	public void givenInvalidType_whenCallsGetResource_shouldReturnEmpty() {
+		final var video = VideoID.unique();
+		final var expectedType = VideoMediaType.THUMBNAIL;
+		final var expectedResource = Fixture.Videos.resource(Fixture.Videos.mediaType());
+
+		final var expectedValues = new ArrayList<String>();
+		expectedValues.add("videoId-%s/type-%s".formatted(video.toString(), VideoMediaType.VIDEO.name()));
+		expectedValues.add("videoId-%s/type-%s".formatted(video.toString(), VideoMediaType.BANNER.name()));
+		expectedValues.add("videoId-%s/type-%s".formatted(video.toString(), VideoMediaType.TRAILER.name()));
+
+		expectedValues.forEach(id -> storageService().store(id, expectedResource));
+
+		final var resource = mediaResourceGateway.getResource(video, expectedType);
+
+		assertTrue(resource.isEmpty());
 	}
 
 
