@@ -3,6 +3,7 @@ package com.fullcycle.admin.catalog.domain.video;
 import com.fullcycle.admin.catalog.domain.AggregateRoot;
 import com.fullcycle.admin.catalog.domain.castmember.CastMemberID;
 import com.fullcycle.admin.catalog.domain.category.CategoryID;
+import com.fullcycle.admin.catalog.domain.events.DomainEvent;
 import com.fullcycle.admin.catalog.domain.genre.GenreID;
 import com.fullcycle.admin.catalog.domain.validation.ValidationHandler;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 import java.time.Instant;
 import java.time.Year;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -58,9 +60,10 @@ public class Video extends AggregateRoot<VideoID> {
       final Set<GenreID> genres,
       final Set<CastMemberID> castMembers,
       final Instant createdAt,
-      final Instant updatedAt
-    ) {
-        super(id);
+      final Instant updatedAt,
+      final List<DomainEvent> domainEvents
+      ) {
+        super(id, domainEvents);
         this.title = title;
         this.description = description;
         this.launchedAt = launchedAt;
@@ -115,6 +118,7 @@ public class Video extends AggregateRoot<VideoID> {
             genres,
             castMembers,
             Instant.now(),
+            null,
             null
         );
     }
@@ -138,7 +142,8 @@ public class Video extends AggregateRoot<VideoID> {
          Set.copyOf(video.getGenres()),
          Set.copyOf(video.getCastMembers()),
          video.getCreatedAt(),
-         video.getUpdatedAt()
+         video.getUpdatedAt(),
+         video.getDomainEvents()
         );
     }
 
@@ -180,7 +185,8 @@ public class Video extends AggregateRoot<VideoID> {
           genres,
           castMembers,
           createdAt,
-          updatedAt
+          updatedAt,
+          null
         );
     }
 
@@ -229,15 +235,23 @@ public class Video extends AggregateRoot<VideoID> {
         }
     }
 
+    private void onAudioVideoMediaUpdated(final AudioVideoMedia media) {
+        if (media != null && media.isPendingEncode()) {
+            registerEvent(new VideoMediaCreated(getId().getValue(), media.getRawLocation()));
+        }
+    }
+
     public Video setVideo(final AudioVideoMedia video) {
         this.video = video;
         this.updatedAt = Instant.now();
+        onAudioVideoMediaUpdated(video);
         return this;
     }
 
     public Video setTrailer(final AudioVideoMedia trailer) {
         this.trailer = trailer;
         this.updatedAt = Instant.now();
+        onAudioVideoMediaUpdated(video);
         return this;
     }
 

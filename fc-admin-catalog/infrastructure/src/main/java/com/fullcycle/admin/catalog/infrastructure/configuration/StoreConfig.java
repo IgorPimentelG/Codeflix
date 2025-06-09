@@ -1,7 +1,7 @@
 package com.fullcycle.admin.catalog.infrastructure.configuration;
 
-import com.fullcycle.admin.catalog.infrastructure.configuration.properties.GCStorageProperties;
-import com.fullcycle.admin.catalog.infrastructure.configuration.properties.StorageProperties;
+import com.fullcycle.admin.catalog.infrastructure.configuration.properties.storage.GCStorageProperties;
+import com.fullcycle.admin.catalog.infrastructure.configuration.properties.storage.StorageProperties;
 import com.fullcycle.admin.catalog.infrastructure.service.StorageService;
 import com.fullcycle.admin.catalog.infrastructure.service.impl.GCStorageService;
 import com.fullcycle.admin.catalog.infrastructure.service.local.InMemoryStorageService;

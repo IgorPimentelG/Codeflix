@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Year;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,6 +59,7 @@ public class VideoTest {
         assertTrue(video.getBanner().isEmpty());
         assertTrue(video.getThumbnail().isEmpty());
         assertTrue(video.getThumbnailHalf().isEmpty());
+        assertTrue(video.getDomainEvents().isEmpty());
 
         assertDoesNotThrow(() -> video.validate(new ThrowsValidationHandler()));
     }
@@ -73,6 +76,7 @@ public class VideoTest {
         final var expectedCategories = Set.of(CategoryID.unique());
         final var expectedGenres = Set.of(GenreID.unique());
         final var expectedCastMember = Set.of(CastMemberID.unique());
+        final var expectedEvent = new VideoMediaCreated(UUID.randomUUID(), "file");
 
         final var video = Video.newVideo(
           "any title",
@@ -86,6 +90,8 @@ public class VideoTest {
           Collections.emptySet(),
           Collections.emptySet()
         );
+
+        video.registerEvent(expectedEvent);
 
         final var videoUpdated = Video.with(video).update(
           expectedTitle,
@@ -119,6 +125,7 @@ public class VideoTest {
         assertTrue(videoUpdated.getBanner().isEmpty());
         assertTrue(videoUpdated.getThumbnail().isEmpty());
         assertTrue(videoUpdated.getThumbnailHalf().isEmpty());
+        assertEquals(1, videoUpdated.getDomainEvents().size());
 
         assertDoesNotThrow(() -> video.validate(new ThrowsValidationHandler()));
     }
@@ -385,8 +392,6 @@ public class VideoTest {
 
         assertDoesNotThrow(() -> video.validate(new ThrowsValidationHandler()));
     }
-
-
 }
 
 

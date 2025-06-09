@@ -1,4 +1,4 @@
-package com.fullcycle.admin.catalog.infrastructure.configuration.properties;
+package com.fullcycle.admin.catalog.infrastructure.configuration.properties.storage;
 
 import lombok.Getter;
 import lombok.Setter;

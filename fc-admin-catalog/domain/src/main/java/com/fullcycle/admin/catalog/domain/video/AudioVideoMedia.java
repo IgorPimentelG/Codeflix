@@ -66,6 +66,10 @@ public class AudioVideoMedia extends ValueObject {
         );
     }
 
+    public boolean isPendingEncode() {
+        return MediaStatus.PENDING == status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

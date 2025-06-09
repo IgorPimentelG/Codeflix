@@ -34,6 +34,12 @@ spring:
         "[hibernate.dialect]": org.hibernate.dialect.MySQL5InnoDBDialect
         "[hibernate.generate_statistics]": true
         "[hibernate.connection.provider_disables_autocommit]": true
+  rabbitmq:
+    dynamic: ${ampq.admin.auto-create}
+    host: ${ampq.host}
+    port: ${ampq.port}
+    username: ${ampq.username}
+    password: ${ampq.password}
 
 google:
   cloud:
@@ -53,3 +59,16 @@ storage:
   catalog-video:
     location-pattern: videoId-{videoId}
     filename-pattern: type-{type}
+
+ampq:
+  admin:
+    auto-create: false
+  queues:
+    video-created:
+      exchange: video.events
+      routing-key: video.created
+      queue: video.created.queue
+    video-encoded:
+      exchange: video.events
+      routing-key: video.encoded
+      queue: video.encoded.queue

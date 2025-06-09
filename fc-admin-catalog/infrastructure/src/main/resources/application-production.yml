@@ -9,3 +9,9 @@ mysql:
   password: ${DATABASE_MYSQL_PASSWORD}
   schema: ${DATABASE_SCHEMA}
   url: ${DATABASE_URL}
+
+amqp:
+  host: ${AMQP_RABBIT_HOST}
+  port: ${AMQP_RABBIT_PORT}
+  username: ${AMQP_RABBIT_USERNAME}
+  password: ${AMQP_RABBIT_PASSWORD}

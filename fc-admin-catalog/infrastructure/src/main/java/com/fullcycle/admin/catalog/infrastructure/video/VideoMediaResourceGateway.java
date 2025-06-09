@@ -2,7 +2,7 @@ package com.fullcycle.admin.catalog.infrastructure.video;
 
 import com.fullcycle.admin.catalog.domain.resource.Resource;
 import com.fullcycle.admin.catalog.domain.video.*;
-import com.fullcycle.admin.catalog.infrastructure.configuration.properties.StorageProperties;
+import com.fullcycle.admin.catalog.infrastructure.configuration.properties.storage.StorageProperties;
 import com.fullcycle.admin.catalog.infrastructure.service.StorageService;
 import org.springframework.stereotype.Component;
 

@@ -2,6 +2,9 @@ server:
   port: 1010
 
 spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:adm_videos_test;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
