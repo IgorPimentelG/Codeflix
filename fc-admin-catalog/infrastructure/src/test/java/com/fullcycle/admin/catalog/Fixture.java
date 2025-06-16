@@ -4,10 +4,8 @@ import com.fullcycle.admin.catalog.domain.castmember.CastMember;
 import com.fullcycle.admin.catalog.domain.castmember.CastMemberType;
 import com.fullcycle.admin.catalog.domain.category.Category;
 import com.fullcycle.admin.catalog.domain.genre.Genre;
-import com.fullcycle.admin.catalog.domain.video.Rating;
+import com.fullcycle.admin.catalog.domain.video.*;
 import com.fullcycle.admin.catalog.domain.resource.Resource;
-import com.fullcycle.admin.catalog.domain.video.Video;
-import com.fullcycle.admin.catalog.domain.video.VideoMediaType;
 import com.fullcycle.admin.catalog.infrastructure.utils.ChecksumUtils;
 import com.github.javafaker.Faker;
 import io.vavr.API;
@@ -92,6 +90,16 @@ public final class Fixture {
             final byte[] content = "content".getBytes();
             final String checksum = ChecksumUtils.generate(content);
             return Resource.with(checksum, content, contentType, type.name().toLowerCase());
+        }
+
+        public static AudioVideoMedia audioVideoMedia(final VideoMediaType type) {
+            final var resource = resource(type);
+            return AudioVideoMedia.with(resource.checksum(), resource.name(), "/raw", "/encoded", MediaStatus.COMPLETED);
+        }
+
+        public static ImageMedia imageMedia(final VideoMediaType type) {
+            final var resource = resource(type);
+            return ImageMedia.with(resource.checksum(), resource.name(), "/location");
         }
 
         public static Rating rating() {

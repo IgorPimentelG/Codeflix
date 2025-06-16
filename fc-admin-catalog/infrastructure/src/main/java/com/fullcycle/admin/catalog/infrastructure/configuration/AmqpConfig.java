@@ -15,14 +15,14 @@ public class AmqpConfig {
 	@Bean
 	@VideoCreatedQueue
 	@ConfigurationProperties("amqp.queues.video-created")
-	private QueueProperties videoCreatedQueueProperties() {
+	public QueueProperties videoCreatedQueueProperties() {
 		return new QueueProperties();
 	}
 
 	@Bean
 	@VideoEncodedQueue
 	@ConfigurationProperties("amqp.queues.video-encoded")
-	private QueueProperties videoEncodedQueueProperties() {
+	public QueueProperties videoEncodedQueueProperties() {
 		return new QueueProperties();
 	}
 
