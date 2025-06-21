@@ -1,1 +1,1 @@
-ALTER TABLE videos_video_media CHANGE media_status status VARCHAR(50) NOT NULL;
+ALTER TABLE videos_video_media RENAME COLUMN media_status TO status;
