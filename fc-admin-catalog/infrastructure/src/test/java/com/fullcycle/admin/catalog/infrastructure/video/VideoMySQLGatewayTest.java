@@ -2,6 +2,7 @@ package com.fullcycle.admin.catalog.infrastructure.video;
 
 import com.fullcycle.admin.catalog.Fixture;
 import com.fullcycle.admin.catalog.IntegrationTest;
+import com.fullcycle.admin.catalog.MySQLGatewayTest;
 import com.fullcycle.admin.catalog.domain.castmember.CastMember;
 import com.fullcycle.admin.catalog.domain.castmember.CastMemberGateway;
 import com.fullcycle.admin.catalog.domain.castmember.CastMemberID;
@@ -27,7 +28,7 @@ import java.util.UUID;
 import static com.fullcycle.admin.catalog.domain.utils.CollectionUtils.mapTo;
 import static org.junit.jupiter.api.Assertions.*;
 
-@IntegrationTest
+@MySQLGatewayTest
 public class VideoMySQLGatewayTest {
 
 	@Autowired
@@ -598,6 +599,7 @@ public class VideoMySQLGatewayTest {
 	}
 
 	@Test
+	@Transactional
 	public void givenAllParameters_whenCallFindAll_shouldReturnFilteredList() {
 		mockVideos();
 
@@ -757,48 +759,48 @@ public class VideoMySQLGatewayTest {
 	}
 
 	private void mockVideos() {
-		genreGateway.create(GENRE);
-		categoryGateway.create(CATEGORY);
-		castMemberGateway.create(CAST_MEMBER);
+			genreGateway.create(GENRE);
+			categoryGateway.create(CATEGORY);
+			castMemberGateway.create(CAST_MEMBER);
 
-		videoGateway.create(Video.newVideo(
-		  "Matrix",
-		  "Realidade virtual e luta pela liberdade da humanidade",
-		  Year.of(Fixture.year()),
-		  Fixture.duration(),
-		  Fixture.Videos.rating(),
-		  Fixture.bool(),
-		  Fixture.bool(),
-		  Set.of(CATEGORY.getId()),
-		  Set.of(),
-		  Set.of()
-		));
+			videoGateway.create(Video.newVideo(
+			  "Matrix",
+			  "Realidade virtual e luta pela liberdade da humanidade",
+			  Year.of(Fixture.year()),
+			  Fixture.duration(),
+			  Fixture.Videos.rating(),
+			  Fixture.bool(),
+			  Fixture.bool(),
+			  Set.of(CATEGORY.getId()),
+			  Set.of(),
+			  Set.of()
+			));
 
-		videoGateway.create(Video.newVideo(
-		  "Titanic",
-		  "Amor proibido e tragédia no maior navio do mundo",
-		  Year.of(Fixture.year()),
-		  Fixture.duration(),
-		  Fixture.Videos.rating(),
-		  Fixture.bool(),
-		  Fixture.bool(),
-		  Set.of(),
-		  Set.of(GENRE.getId()),
-		  Set.of()
-		));
+			videoGateway.create(Video.newVideo(
+			  "Titanic",
+			  "Amor proibido e tragédia no maior navio do mundo",
+			  Year.of(Fixture.year()),
+			  Fixture.duration(),
+			  Fixture.Videos.rating(),
+			  Fixture.bool(),
+			  Fixture.bool(),
+			  Set.of(),
+			  Set.of(GENRE.getId()),
+			  Set.of()
+			));
 
-		videoGateway.create(Video.newVideo(
-		  "Harry Potter",
-		  "Jovem bruxo descobre seu destino e enfrenta o mal em Hogwarts",
-		  Year.of(Fixture.year()),
-		  Fixture.duration(),
-		  Fixture.Videos.rating(),
-		  Fixture.bool(),
-		  Fixture.bool(),
-		  Set.of(),
-		  Set.of(),
-		  Set.of(CAST_MEMBER.getId())
-		));
+			videoGateway.create(Video.newVideo(
+			  "Harry Potter",
+			  "Jovem bruxo descobre seu destino e enfrenta o mal em Hogwarts",
+			  Year.of(Fixture.year()),
+			  Fixture.duration(),
+			  Fixture.Videos.rating(),
+			  Fixture.bool(),
+			  Fixture.bool(),
+			  Set.of(),
+			  Set.of(),
+			  Set.of(CAST_MEMBER.getId())
+			));
 
 		videoGateway.create(Video.newVideo(
 		  "Vingadores",

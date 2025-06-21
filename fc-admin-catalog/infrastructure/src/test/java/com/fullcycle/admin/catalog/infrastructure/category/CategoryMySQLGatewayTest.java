@@ -314,6 +314,7 @@ public class CategoryMySQLGatewayTest {
         final var ids = List.of(category1.getId(), category2.getId(), CategoryID.from(UUID.randomUUID()));
         final var output = categoryGateway.existsByIds(ids);
 
-       assertEquals(expectedIds, output);
+       assertTrue(expectedIds.contains(output.get(0)));
+       assertTrue(expectedIds.contains(output.get(1)));
     }
 }

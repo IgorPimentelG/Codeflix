@@ -38,7 +38,7 @@ public class CastMemberE2ETest implements MockDsl {
     private CastMemberRepository castMemberRepository;
 
     @Container
-    private static final MySQLContainer<?> MYSQL_CONTAINER = new MySQLContainer<>("mysql:latest")
+    private static final MySQLContainer<?> MYSQL_CONTAINER = new MySQLContainer<>("mysql:8.0")
       .withDatabaseName("adm_videos")
       .withUsername("root")
       .withPassword("admin")

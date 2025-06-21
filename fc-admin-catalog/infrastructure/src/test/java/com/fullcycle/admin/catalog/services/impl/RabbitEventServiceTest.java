@@ -30,7 +30,7 @@ public class RabbitEventServiceTest {
 
 	@Component
 	static class VideoCreatedNewsListener {
-		@RabbitListener(id = LISTENER, queues = "${ampq.queue.video-created.routing-key}")
+		@RabbitListener(id = LISTENER, queues = "${amqp.queues.video-created.routing-key}")
 		void onVideoCreated(@Payload String message) {}
 	}
 

@@ -21,7 +21,7 @@ public class StoreConfig {
 	}
 
 	@Bean(name = "storageService")
-	@Profile("test")
+	@Profile({"test", "test-integration", "test-e2e"})
 	public StorageService inMemoryStorageService() {
 		return new InMemoryStorageService();
 	}
