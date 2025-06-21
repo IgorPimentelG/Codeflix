@@ -14,3 +14,11 @@ spring:
     console:
       enabled: true
       path: /h2
+
+amqp:
+  admin:
+    auto-create: true
+  host: localhost
+  port: 5672
+  username: admin
+  password: admin
