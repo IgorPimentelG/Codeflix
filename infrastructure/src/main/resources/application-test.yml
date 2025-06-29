@@ -19,3 +19,7 @@ amqp:
   port: 5672
   username: admin
   password: admin
+
+keycloak:
+  realm: test
+  host: http://test:8443

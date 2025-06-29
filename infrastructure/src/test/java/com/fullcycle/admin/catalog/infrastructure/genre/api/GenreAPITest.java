@@ -1,6 +1,7 @@
 package com.fullcycle.admin.catalog.infrastructure.genre.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fullcycle.admin.catalog.ApiTest;
 import com.fullcycle.admin.catalog.ControllerTest;
 import com.fullcycle.admin.catalog.application.genre.create.CreateGenreOutput;
 import com.fullcycle.admin.catalog.application.genre.create.CreateGenreUseCase;
@@ -78,6 +79,7 @@ public class GenreAPITest {
         when(createGenreUseCase.execute(any())).thenReturn(CreateGenreOutput.from(expectedId));
 
         final var request = MockMvcRequestBuilders.post("/genres")
+          .with(ApiTest.GENRES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(input));
 
@@ -107,6 +109,7 @@ public class GenreAPITest {
         when(createGenreUseCase.execute(any())).thenThrow(new NotificationException(Notification.create(new Error(expectedErrorMessage))));
 
         final var request = MockMvcRequestBuilders.post("/genres")
+          .with(ApiTest.GENRES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(input));
 
@@ -138,6 +141,7 @@ public class GenreAPITest {
         when(getGenreByIdUseCase.execute(any())).thenReturn(GenreOutput.from(genre));
 
         final var request = MockMvcRequestBuilders.get("/genres/{id}", expectedId.toString())
+          .with(ApiTest.GENRES_JWT)
           .contentType(MediaType.APPLICATION_JSON)
           .accept(MediaType.APPLICATION_JSON);
 
@@ -164,6 +168,7 @@ public class GenreAPITest {
         when(getGenreByIdUseCase.execute(any())).thenThrow(NotFoundException.with(Genre.class, GenreID.from(expectedId)));
 
         final var request = MockMvcRequestBuilders.get("/genres/{id}", expectedId.toString())
+          .with(ApiTest.GENRES_JWT)
           .contentType(MediaType.APPLICATION_JSON);
 
         final var response = mvc.perform(request).andDo(print());
@@ -189,6 +194,7 @@ public class GenreAPITest {
         final var input = new UpdateGenreRequest(expectedName, expectedCategories, expectedIsActive);
 
         final var request = MockMvcRequestBuilders.put("/genres/{id}", expectedId.toString())
+          .with(ApiTest.GENRES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(input));
 
@@ -212,6 +218,7 @@ public class GenreAPITest {
         doNothing().when(deleteGenreUseCase).execute(any());
 
         final var request = MockMvcRequestBuilders.delete("/genres/{id}", expectedId.toString())
+          .with(ApiTest.GENRES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .accept(MediaType.APPLICATION_JSON_VALUE);
 
@@ -244,6 +251,7 @@ public class GenreAPITest {
           .queryParam("sort", expectedSort)
           .queryParam("dir", expectedDirection)
           .queryParam("search", expectedTerms)
+          .with(ApiTest.GENRES_JWT)
           .accept(MediaType.APPLICATION_JSON);
 
         final var response = mvc.perform(request).andDo(print());

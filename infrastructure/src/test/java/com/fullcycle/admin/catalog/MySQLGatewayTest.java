@@ -16,6 +16,7 @@ import java.lang.annotation.*;
 @ExtendWith(CleanUpExtension.class)
 @ComponentScan(
   basePackages = "com.fullcycle.admin.catalog",
+  useDefaultFilters = false,
   includeFilters = {
     @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".[MySQLGateway]")
   }

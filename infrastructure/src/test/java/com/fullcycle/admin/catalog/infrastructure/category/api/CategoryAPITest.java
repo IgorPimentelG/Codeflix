@@ -1,6 +1,7 @@
 package com.fullcycle.admin.catalog.infrastructure.category.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fullcycle.admin.catalog.ApiTest;
 import com.fullcycle.admin.catalog.ControllerTest;
 import com.fullcycle.admin.catalog.application.category.create.CreateCategoryOutput;
 import com.fullcycle.admin.catalog.application.category.create.CreateCategoryUseCase;
@@ -76,6 +77,7 @@ public class CategoryAPITest {
         final var input = new CreateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         final var request = MockMvcRequestBuilders.post("/categories")
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(input));
 
@@ -108,6 +110,7 @@ public class CategoryAPITest {
         when(createCategoryUseCase.execute(any())).thenReturn(Either.left(Notification.create(new Error(expectedErrorMessage))));
 
         final var request = MockMvcRequestBuilders.post("/categories")
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(input));
 
@@ -134,6 +137,7 @@ public class CategoryAPITest {
         when(createCategoryUseCase.execute(any())).thenThrow(DomainException.with(new Error(expectedErrorMessage)));
 
         final var request = MockMvcRequestBuilders.post("/categories")
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(input));
 
@@ -160,7 +164,9 @@ public class CategoryAPITest {
 
         when(getCategoryByIdUseCase.execute(any())).thenReturn(CategoryOutput.from(category));
 
-        final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.toString()).contentType(MediaType.APPLICATION_JSON_VALUE);
+        final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.toString())
+          .with(ApiTest.CATEGORIES_JWT)
+          .contentType(MediaType.APPLICATION_JSON_VALUE);
 
         mvc.perform(request)
           .andDo(print())
@@ -185,7 +191,9 @@ public class CategoryAPITest {
 
         when(getCategoryByIdUseCase.execute(any())).thenThrow(NotFoundException.with(Category.class, expectedId));
 
-        final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.toString()).contentType(MediaType.APPLICATION_JSON_VALUE);
+        final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.toString())
+          .with(ApiTest.CATEGORIES_JWT)
+          .contentType(MediaType.APPLICATION_JSON_VALUE);
 
         mvc.perform(request)
           .andDo(print())
@@ -209,6 +217,7 @@ public class CategoryAPITest {
         final var command = new UpdateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         final var request = MockMvcRequestBuilders.put("/categories/{id}", expectedId.toString())
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(command));
 
@@ -240,6 +249,7 @@ public class CategoryAPITest {
         when(updateCategoryUseCase.execute(any())).thenThrow(NotFoundException.with(Category.class, expectedId));
 
         final var request = MockMvcRequestBuilders.put("/categories/{id}", expectedId.getValue().toString())
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(command));
 
@@ -271,6 +281,7 @@ public class CategoryAPITest {
         when(updateCategoryUseCase.execute(any())).thenReturn(Left(Notification.create(new Error(expectedErrorMessage))));
 
         final var request = MockMvcRequestBuilders.put("/categories/{id}", expectedId.getValue().toString())
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .content(mapper.writeValueAsString(command));
 
@@ -295,7 +306,9 @@ public class CategoryAPITest {
 
         doNothing().when(deleteCategoryUseCase).execute(any());
 
-        final var request = MockMvcRequestBuilders.delete("/categories/{id}", expectedId.toString()).contentType(MediaType.APPLICATION_JSON_VALUE);
+        final var request = MockMvcRequestBuilders.delete("/categories/{id}", expectedId.toString())
+          .with(ApiTest.CATEGORIES_JWT)
+          .contentType(MediaType.APPLICATION_JSON_VALUE);
 
         mvc.perform(request).andDo(print()).andExpectAll(status().isNoContent());
 
@@ -322,6 +335,7 @@ public class CategoryAPITest {
         ));
 
         final var request = MockMvcRequestBuilders.get("/categories")
+          .with(ApiTest.CATEGORIES_JWT)
           .contentType(MediaType.APPLICATION_JSON_VALUE)
           .queryParam("page", String.valueOf(expectedPage))
           .queryParam("perPage", String.valueOf(expectedPerPage))
