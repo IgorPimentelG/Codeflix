@@ -17,3 +17,7 @@ amqp:
   port: 5672
   username: admin
   password: admin
+
+keycloak:
+  realm: fc3-codeflix
+  host: http://localhost:8443

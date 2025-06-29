@@ -12,14 +12,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
 import java.util.UUID;
 
+@RestController
 @RequestMapping("/videos")
 @Tag(name = "Videos")
+@PreAuthorize("hasAnyRole('ROLE_CATALOG_ADMIN', 'ROLE_CATALOG_VIDEOS')")
 public interface VideoAPI {
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
